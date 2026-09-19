@@ -1,0 +1,101 @@
+.sidebar {
+  padding: 2rem 1.5rem;
+  border-right: 1px solid var(--border);
+  background: var(--bg-panel);
+}
+
+.sidebar-mark {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  margin-bottom: 2.5rem;
+}
+
+.sidebar-mark-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--violet), var(--yellow));
+  flex-shrink: 0;
+}
+
+.ladder {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ladder li {
+  display: flex;
+  flex-direction: column;
+}
+
+.rung {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  text-align: left;
+  padding: 0.4rem 0;
+  cursor: pointer;
+  width: 100%;
+}
+
+.rung-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  margin-top: 4px;
+  border: 2px solid var(--rung-color);
+  background: transparent;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease;
+}
+
+.rung-dot.is-lit {
+  background: var(--rung-color);
+}
+
+.rung-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.rung-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-faint);
+}
+
+.rung-title {
+  font-size: 0.92rem;
+}
+
+.rung.is-current .rung-title {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.rung.is-current .rung-num {
+  color: var(--rung-color);
+}
+
+.rung-line {
+  width: 2px;
+  height: 1.4rem;
+  background: var(--border);
+  margin-left: 5px;
+}
+
+@media (max-width: 860px) {
+  .sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}

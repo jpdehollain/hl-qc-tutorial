@@ -1,0 +1,57 @@
+/*
+  Design concept
+  --------------
+  The four requested colours (violet, blue, green, yellow) are the same order
+  they appear in the visible spectrum, high energy to low. We use that
+  honestly: each chapter is assigned a position on the spectrum, so the
+  "energy ladder" in the sidebar is not decoration, it's the chapter's photon
+  energy - the same physics the tutorial is teaching. Chapter 1 (setting up
+  the idea) sits at violet; chapter 5 (the payoff) sits at yellow.
+
+  Background is a deep, slightly warm near-black with a violet cast, evoking
+  a dark lab / spectrometer readout rather than a generic "dark mode" grey.
+*/
+
+:root {
+  /* base surface */
+  --bg: #120f1f;
+  --bg-panel: #1b1730;
+  --bg-panel-raised: #241f3d;
+  --border: #332c54;
+
+  /* text */
+  --text: #f1eefa;
+  --text-dim: #a89fc9;
+  --text-faint: #6f6790;
+
+  /* spectrum accents, high energy -> low energy */
+  --violet: #9d6dfb;
+  --blue: #4d8dfb;
+  --green: #33c98f;
+  --yellow: #e8c547;
+
+  /* semantic mapping used across the app */
+  --accent-1: var(--violet);  /* chapter 1 */
+  --accent-2: var(--blue);    /* chapter 2 */
+  --accent-3: var(--green);   /* chapter 3 */
+  --accent-4: #4ade7a;        /* chapter 4 (green, shifted lighter to stay distinct from 3) */
+  --accent-5: var(--yellow);  /* chapter 5 */
+
+  --code-bg: #0d0b18;
+
+  /* type */
+  --font-display: "IBM Plex Serif", Georgia, serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --content-width: 68ch;
+  --radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

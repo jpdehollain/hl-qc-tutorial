@@ -1,0 +1,101 @@
+import Equation from "../components/Equation";
+
+export default function Chapter1() {
+  return (
+    <article>
+      <h1>Physics in the quantum world</h1>
+
+      <h2>Intro to this tutorial</h2>
+      
+      <p>
+        If you have read news articles about quantum computers but don't really
+        get what makes them different from ordinary computers, this tutorial is
+        here to help. It is aimed at people who are not necessarily proficient
+        in quantum mechanics, but who are willing to do (or at least look at) 
+        some hands on maths and simple programming to understand what makes 
+        quantum computers powerful.
+      </p>
+
+      <h2>What do we use physics for?</h2>
+
+      <p>
+        Physics gives us mathematical tools to describe the world around us. If
+        you remember one thing from high school physics, it is probably how to
+        predict the motion of a ball, using Newton's laws. For example, if a
+        football is kicked from the penalty spot with a speed of 25 metres per 
+        second, we can calculate how long it will take to reach the goal 11 
+        metres away, with some simple maths:{" "}
+        <Equation tex="t = \frac{d}{v} = \frac{11\text{ m}}{25\text{ m/s}}
+        = 0.44\text{ s}" display={false} />.
+        With sligthly more complicated maths, we can predict the entire 
+        trajectory of the ball. This process of using a mathematical model to 
+        predict how a physical system evolves over time is called{" "}
+        <strong>simulation</strong>.
+      </p>
+
+      <h2>Simulating the quantum world</h2>
+      
+      <p>
+        If we want to add more physics to our soccer ball model -- like the
+        spin and aerodynamics of the ball -- to simulate more complex 
+        trajectories, the maths will eventually become too difficult to solve 
+        by hand. Luckily, computers are great at doing these types of maths and
+        we can program them to perform these simulations very quickly.
+        Richard Feynman was not only a quantum genius, he also knew a lot about
+        the inner workings of computers. When he proposed the idea of a quantum
+        computer, it was because he realized that the type of maths required to
+        simulate the physics of the quantum world was not only difficult to
+        solve by hand, but also difficult to solve on a classical computer.
+      </p>
+
+      <p>
+        In the next three chapters of the tutorial, I will introduce a very
+        basic model of a quantum system, which we will first solve by hand and
+        then program a computer to simulate, while increasing the complexity of
+        the model. In the final chapter, we will explore the levels of 
+        complexity required to perform some useful quantum computations, and 
+        how this relates to the current state of quantum computing technology.
+      </p>
+
+      <p>
+        Quantum mechanics has a direct analogue of this idea. Instead of
+        forces, physicists work with a single mathematical object called the{" "}
+        <strong>Hamiltonian</strong>, written <Equation tex="H" display={false} />.
+        The Hamiltonian is just a description of the total energy of a
+        system &mdash; kinetic and potential energy, bundled together into
+        one operator. Once you know the Hamiltonian of a system, an equation
+        called the <strong>Schr&ouml;dinger equation</strong> plays the same
+        role that Newton's second law plays for the ball: it tells you
+        exactly how the system's quantum state evolves in time.
+      </p>
+
+      <Equation tex="i \frac{d}{dt} |\psi(t)\rangle = H \, |\psi(t)\rangle" />
+
+      <p>
+        Here <Equation tex="|\psi(t)\rangle" display={false} /> (read "ket
+        psi") is the state of the system at time <Equation tex="t" display={false} />.
+        It plays the role that "position and velocity of the ball" played in
+        the Newtonian picture. This equation says: to know how the state
+        changes an instant from now, multiply it by the Hamiltonian. Solve
+        that equation, and you know the entire future of the system.
+      </p>
+
+      <p>
+        That's the theory. The practical problem is that for anything bigger
+        than a toy system, <Equation tex="H" display={false} /> is a matrix
+        so large that no computer &mdash; classical or otherwise &mdash; can
+        write it down in full. What a quantum computer offers is a way to{" "}
+        <em>apply</em> that evolution to a real physical system of qubits
+        without ever writing the matrix out, because the qubits themselves
+        become the quantum system being simulated.
+      </p>
+
+      <p>
+        Before any of that will make sense, we need to see the Schr&ouml;dinger
+        equation actually solved for something concrete. The next chapter
+        does exactly that &mdash; by hand &mdash; for the simplest possible
+        quantum system: a single qubit.
+      </p>
+    </article>
+  );
+}
