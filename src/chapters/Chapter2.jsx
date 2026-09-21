@@ -18,15 +18,22 @@ export default function Chapter2() {
       </p>
 
       <p>
-        Postulate 1 says that something that lives in the quantum world by a
-        set of numbers called a <strong>state</strong>, which we will represent
-        with the symbol <Equation tex="|\psi\rangle" display={false} />.
-        Postulate 5 presents one of the most famous equations that you may have
-        heard of -- the Schr&ouml;dinger equation -- which we can use to
-        predict how a state changes over time. It is the quantum analogue of
-        using Newton's second law to predict the ball's trajectory.
+        Postulate 1 says that something that lives in the quantum world is
+        described by a set of numbers called a <strong>state</strong>, which 
+        we will represent with the symbol{" "}
+        <Equation tex="|\psi\rangle" display={false} />. Postulate 5 presents 
+        a single equation which predicts how a state changes over time, called 
+        the Schr&ouml;dinger equation -- it has nothing to do with his more
+        famous cat 😸 -- but its use is analogous to using Newton's second law
+        to predict the ball's trajectory. The equation,
       </p>
       
+      <Equation tex="i \hbar \frac{d}{dt} |\psi(t)\rangle = H \, |\psi(t)\rangle" />
+
+      <p>
+        has 
+      </p>
+
       <p>
         The simplest possible quantum system is a single qubit: something
         with just two distinguishable states, written{" "}
@@ -47,18 +54,48 @@ export default function Chapter2() {
       <Equation tex="H = X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}" />
 
       <p>
-        We're going to solve the Schr&ouml;dinger equation{" "}
-        <Equation tex="i\frac{d}{dt}|\psi(t)\rangle = X|\psi(t)\rangle" display={false} />{" "}
-        for this Hamiltonian, by hand, starting from{" "}
-        <Equation tex="|\psi(0)\rangle = |0\rangle" display={false} />.
+        Before working with <Equation tex="X" display={false} /> specifically,
+        let's solve the Schr&ouml;dinger equation once, for{" "}
+        <em>any</em> Hamiltonian. Notice{" "}
+        <Equation tex="i\frac{d}{dt}|\psi(t)\rangle = H|\psi(t)\rangle" display={false} />{" "}
+        has exactly the shape of the simplest differential equation there is,{" "}
+        <Equation tex="i\frac{d}{dt}c(t) = E\,c(t)" display={false} />, except
+        the number <Equation tex="E" display={false} /> has been replaced by
+        an operator <Equation tex="H" display={false} />. The scalar equation
+        is solved by an exponential,{" "}
+        <Equation tex="c(t) = e^{-iEt}c(0)" display={false} />, and remarkably
+        the same trick works here &mdash; provided we generalise what
+        "exponential of a matrix" means:
+      </p>
+
+      <Equation tex="e^{-iHt} \;=\; \sum_{n=0}^{\infty} \frac{(-iHt)^n}{n!} \;=\; I - iHt - \frac{H^2t^2}{2!} + \cdots" />
+
+      <p>
+        (we're setting <Equation tex="\hbar=1" display={false} />, as in
+        Chapter&nbsp;1). This series defines <Equation tex="e^{-iHt}" display={false} />{" "}
+        for any matrix <Equation tex="H" display={false} />, and it gives us
+        the general solution to the Schr&ouml;dinger equation directly:
+      </p>
+
+      <Equation tex="\boxed{\;|\psi(t)\rangle = e^{-iHt}\,|\psi(0)\rangle\;}" />
+
+      <p>
+        You can check this is right: at <Equation tex="t=0" display={false} />{" "}
+        it correctly gives <Equation tex="|\psi(0)\rangle" display={false} />,
+        and differentiating the series term by term reproduces{" "}
+        <Equation tex="i\frac{d}{dt}|\psi(t)\rangle = H|\psi(t)\rangle" display={false} />{" "}
+        exactly. The entire problem has collapsed into computing one matrix
+        exponential. For <Equation tex="H=X" display={false} /> and{" "}
+        <Equation tex="|\psi(0)\rangle=|0\rangle" display={false} />, let's
+        actually compute it.
       </p>
 
       <h3>Step 1 &mdash; find the eigenvectors of X</h3>
       <p>
-        The trick to solving any Schr&ouml;dinger equation is to work in the
-        basis where the Hamiltonian is diagonal, because in that basis each
-        piece of the state just picks up a phase. <Equation tex="X" display={false} />{" "}
-        has two eigenvectors:
+        The trick to computing a matrix exponential is to work in the basis
+        where the Hamiltonian is diagonal, because in that basis{" "}
+        <Equation tex="e^{-iHt}" display={false} /> reduces to an ordinary
+        number. <Equation tex="X" display={false} /> has two eigenvectors:
       </p>
       <Equation tex="|+\rangle = \frac{1}{\sqrt{2}}\big(|0\rangle+|1\rangle\big), \quad X|+\rangle = +1\,|+\rangle" />
       <Equation tex="|-\rangle = \frac{1}{\sqrt{2}}\big(|0\rangle-|1\rangle\big), \quad X|-\rangle = -1\,|-\rangle" />
@@ -67,18 +104,25 @@ export default function Chapter2() {
       <p>Inverting the two lines above gives us:</p>
       <Equation tex="|0\rangle = \frac{1}{\sqrt{2}}\big(|+\rangle + |-\rangle\big)" />
 
-      <h3>Step 3 &mdash; evolve each eigenvector</h3>
+      <h3>Step 3 &mdash; apply the exponential to each eigenvector</h3>
       <p>
-        For an eigenvector of <Equation tex="H" display={false} /> with
-        eigenvalue <Equation tex="E" display={false} />, the Schr&ouml;dinger
-        equation collapses to a single ordinary differential equation,{" "}
-        <Equation tex="i\frac{d}{dt}c(t) = E\,c(t)" display={false} />, whose
-        solution is just a spinning phase:
+        Because <Equation tex="X|+\rangle = |+\rangle" display={false} /> and{" "}
+        <Equation tex="X|-\rangle = -|-\rangle" display={false} />, every
+        power of <Equation tex="X" display={false} /> just multiplies each
+        eigenvector by its eigenvalue raised to that power. Substitute that
+        into the series for <Equation tex="e^{-iXt}" display={false} /> from
+        before, and each series collapses back down to an ordinary scalar
+        exponential:
       </p>
-      <Equation tex="|+\rangle \rightarrow e^{-it}|+\rangle, \qquad |-\rangle \rightarrow e^{+it}|-\rangle" />
+      <Equation tex="e^{-iXt}|+\rangle = \sum_{n=0}^{\infty}\frac{(-it)^n}{n!}|+\rangle = e^{-it}|+\rangle" />
+      <Equation tex="e^{-iXt}|-\rangle = \sum_{n=0}^{\infty}\frac{(it)^n}{n!}|-\rangle = e^{+it}|-\rangle" />
 
       <h3>Step 4 &mdash; recombine</h3>
-      <p>Putting the evolved pieces back together:</p>
+      <p>
+        We now know how <Equation tex="e^{-iXt}" display={false} /> acts on
+        each eigenvector. Recombine them using the decomposition from
+        Step&nbsp;2 to get <Equation tex="e^{-iXt}|0\rangle" display={false} />:
+      </p>
       <Equation tex="|\psi(t)\rangle = \frac{1}{\sqrt{2}}\Big(e^{-it}|+\rangle + e^{it}|-\rangle\Big)" />
       <p>
         Substitute <Equation tex="|+\rangle" display={false} /> and{" "}
@@ -91,9 +135,14 @@ export default function Chapter2() {
       <Equation tex="\boxed{\;|\psi(t)\rangle = \cos(t)\,|0\rangle \;-\; i\sin(t)\,|1\rangle\;}" />
 
       <p>
-        That's the full, exact solution &mdash; solved with nothing more
-        exotic than diagonalising a <Equation tex="2\times2" display={false} />{" "}
-        matrix.
+        That's <Equation tex="e^{-iXt}|0\rangle" display={false} /> computed
+        completely by hand, using nothing more exotic than diagonalising a{" "}
+        <Equation tex="2\times2" display={false} /> matrix. It's exactly the
+        same matrix exponential a computer will compute for us in the next
+        chapter &mdash; the only difference is that a computer doesn't need
+        to spot a clever eigenvector trick first, which is what makes it
+        worth using once the Hamiltonian gets bigger than{" "}
+        <Equation tex="2\times2" display={false} />.
       </p>
 
       <h2>Reading the answer on a sphere</h2>
