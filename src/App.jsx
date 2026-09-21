@@ -5,6 +5,7 @@ import Chapter2 from "./chapters/Chapter2";
 import Chapter3 from "./chapters/Chapter3";
 import Chapter4 from "./chapters/Chapter4";
 import Chapter5 from "./chapters/Chapter5";
+import Chapter6 from "./chapters/Chapter6";
 import "./App.css";
 
 const CHAPTER_COMPONENTS = {
@@ -13,6 +14,7 @@ const CHAPTER_COMPONENTS = {
   3: Chapter3,
   4: Chapter4,
   5: Chapter5,
+  6: Chapter6,
 };
 
 export default function App() {
@@ -33,8 +35,8 @@ export default function App() {
               &larr; Previous
             </button>
             <button
-              disabled={current === 5}
-              onClick={() => setCurrent((c) => Math.min(5, c + 1))}
+              disabled={current === 6}
+              onClick={() => setCurrent((c) => Math.min(6, c + 1))}
             >
               Next &rarr;
             </button>
