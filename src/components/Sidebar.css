@@ -18,7 +18,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--violet), var(--yellow));
+  background: linear-gradient(135deg, var(--blue), var(--olive));
   flex-shrink: 0;
 }
 
