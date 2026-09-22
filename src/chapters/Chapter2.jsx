@@ -36,7 +36,7 @@ export default function Chapter2() {
         famous cat 😸. 
         For the purpose of this tutorial I will not show you what the equation 
         looks like, but you just need to know that the solution to the 
-        Schr&ouml;dinger equation is a mathematical object called the 
+        Schr&ouml;dinger equation is a mathematical object called the{" "}
         <em>time-evolution operator</em>. 
         This operator is ver handy because if we multiply it by the quantum 
         state at point in time, we can predict what the state will be at any 
@@ -44,18 +44,13 @@ export default function Chapter2() {
         This last sentence is written mathematically as:
       </p>
 
-      <Equation tex="|\psi(t)\rangle = e^{-iHt}\,|\psi(0)\rangle" />
+      <Equation tex="|\psi(t)\rangle = e^{-iHt/\hbar}\,|\psi(0)\rangle" />
 
       <p>
-        
-      </p>
-
-      <p>
-        this equation has some terms you may or may not have seen before: <X>i</X>
-        is the imaginary unit, which tells us we're working with complex
+        this equation has some terms you may or may not have seen before:{" "}
+        <X>i</X> is the imaginary unit, which tells us we're working with complex
         numbers; <X>\hbar</X> is the Planck constant, a fundamental constant of
-        nature that helps us work in manegeable units; <Equation tex="\frac{d}{dt}" display={false}/> is a
-        mathematical operator that  and the most important
+        nature that helps us work in manegeable units; and the most important
         part of the equation is the Hamiltonian <X>H</X>, which is a mathematical
         object that contains the sum of the kinetic and potential energy in the
         system. Just like with the soccer ball example, Hamiltonians can start

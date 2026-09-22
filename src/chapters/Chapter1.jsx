@@ -57,45 +57,6 @@ export default function Chapter1() {
         how this relates to the current state of quantum computing technology.
       </p>
 
-      <p>
-        Quantum mechanics has a direct analogue of this idea. Instead of
-        forces, physicists work with a single mathematical object called the{" "}
-        <strong>Hamiltonian</strong>, written <Equation tex="H" display={false} />.
-        The Hamiltonian is just a description of the total energy of a
-        system &mdash; kinetic and potential energy, bundled together into
-        one operator. Once you know the Hamiltonian of a system, an equation
-        called the <strong>Schr&ouml;dinger equation</strong> plays the same
-        role that Newton's second law plays for the ball: it tells you
-        exactly how the system's quantum state evolves in time.
-      </p>
-
-      <Equation tex="i \frac{d}{dt} |\psi(t)\rangle = H \, |\psi(t)\rangle" />
-
-      <p>
-        Here <Equation tex="|\psi(t)\rangle" display={false} /> (read "ket
-        psi") is the state of the system at time <Equation tex="t" display={false} />.
-        It plays the role that "position and velocity of the ball" played in
-        the Newtonian picture. This equation says: to know how the state
-        changes an instant from now, multiply it by the Hamiltonian. Solve
-        that equation, and you know the entire future of the system.
-      </p>
-
-      <p>
-        That's the theory. The practical problem is that for anything bigger
-        than a toy system, <Equation tex="H" display={false} /> is a matrix
-        so large that no computer &mdash; classical or otherwise &mdash; can
-        write it down in full. What a quantum computer offers is a way to{" "}
-        <em>apply</em> that evolution to a real physical system of qubits
-        without ever writing the matrix out, because the qubits themselves
-        become the quantum system being simulated.
-      </p>
-
-      <p>
-        Before any of that will make sense, we need to see the Schr&ouml;dinger
-        equation actually solved for something concrete. The next chapter
-        does exactly that &mdash; by hand &mdash; for the simplest possible
-        quantum system: a single qubit.
-      </p>
     </article>
   );
 }

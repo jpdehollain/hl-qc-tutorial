@@ -2,6 +2,7 @@
   padding: 2rem 1.5rem;
   border-right: 1px solid var(--border);
   background: var(--bg-panel);
+  overflow-y: auto;
 }
 
 .sidebar-mark {
@@ -97,5 +98,6 @@
   .sidebar {
     border-right: none;
     border-bottom: 1px solid var(--border);
+    overflow-y: visible;
   }
 }
