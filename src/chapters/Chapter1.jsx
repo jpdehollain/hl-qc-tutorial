@@ -1,4 +1,4 @@
-import Equation from "../components/Equation";
+import Equation, { X } from "../components/Equation";
 
 export default function Chapter1() {
   return (
@@ -22,8 +22,8 @@ export default function Chapter1() {
         Physics gives us mathematical tools to describe the world around us. If
         you remember one thing from high school physics, it is probably how to
         predict the motion of a ball, using Newton's laws. For example, if a
-        football is kicked from the penalty spot with a speed of 25 metres per 
-        second, we can calculate how long it will take to reach the goal 11 
+        football is kicked from the penalty spot with a velocity of 25 metres 
+        per second, we can calculate how long it will take to reach the goal 11 
         metres away, with some simple maths:{" "}
         <Equation tex="t = \frac{d}{v} = \frac{11\text{ m}}{25\text{ m/s}}
         = 0.44\text{ s}" display={false} />.

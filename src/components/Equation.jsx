@@ -23,3 +23,7 @@ export default function Equation({ tex, display = true }) {
     <span ref={ref} />
   );
 }
+
+export function X({ children }) {
+  return <Equation tex={children} display={false} />;
+}

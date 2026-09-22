@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import Equation from "../components/Equation";
+import Equation, { X } from "../components/Equation";
 
 // three.js is a heavy dependency - only load it once someone is actually
 // reading this chapter, not as part of the initial page load.
@@ -11,27 +11,56 @@ export default function Chapter2() {
       <h1>What does a quantum system look like?</h1>
 
       <p>
-        Just like Newton's laws define the rules for how everyday things move,
-        the physical behaviour of quantum <em>things</em> is completely
-        described by 5 foundational postulates. For the purposes of this
-        tutorial, we will only need to learn about postulates 1 and 5.
+        When we think of quantum, we often think about tiny things like
+        electrons, photons and atoms. 
+        But what makes something quantum is not
+        its size, but the way it behaves, or more formally, the type of
+        mathematics that we need to use to describe it.
       </p>
 
       <p>
-        Postulate 1 says that something that lives in the quantum world is
-        described by a set of numbers called a <strong>state</strong>, which 
-        we will represent with the symbol{" "}
-        <Equation tex="|\psi\rangle" display={false} />. Postulate 5 presents 
-        a single equation which predicts how a state changes over time, called 
-        the Schr&ouml;dinger equation -- it has nothing to do with his more
-        famous cat 😸 -- but its use is analogous to using Newton's second law
-        to predict the ball's trajectory. The equation,
+        To describe a physical object we need two things: a description of the
+        object at a specific time -- or its <strong>state</strong> and a rule
+        that tells us how that state changes over time. 
+        This combination of state and rule we will call a <strong>system</strong>. 
+        In our football example, the state of the system can be the position of 
+        the ball and its velocity, and Newton's second law lets us predict how it 
+        will move.
       </p>
       
-      <Equation tex="i \hbar \frac{d}{dt} |\psi(t)\rangle = H \, |\psi(t)\rangle" />
+      <p>
+        Similarly, a quantum system is described by a <em>quantum state</em>, 
+        which we will represent with the symbol <X>|\psi\rangle</X>. 
+        To know how that state changes over time, we use a rule called the 
+        Schr&ouml;dinger equation -- which has nothing to do with his more 
+        famous cat 😸. 
+        For the purpose of this tutorial I will not show you what the equation 
+        looks like, but you just need to know that the solution to the 
+        Schr&ouml;dinger equation is a mathematical object called the 
+        <em>time-evolution operator</em>. 
+        This operator is ver handy because if we multiply it by the quantum 
+        state at point in time, we can predict what the state will be at any 
+        other moment. 
+        This last sentence is written mathematically as:
+      </p>
+
+      <Equation tex="|\psi(t)\rangle = e^{-iHt}\,|\psi(0)\rangle" />
 
       <p>
-        has 
+        
+      </p>
+
+      <p>
+        this equation has some terms you may or may not have seen before: <X>i</X>
+        is the imaginary unit, which tells us we're working with complex
+        numbers; <X>\hbar</X> is the Planck constant, a fundamental constant of
+        nature that helps us work in manegeable units; <Equation tex="\frac{d}{dt}" display={false}/> is a
+        mathematical operator that  and the most important
+        part of the equation is the Hamiltonian <X>H</X>, which is a mathematical
+        object that contains the sum of the kinetic and potential energy in the
+        system. Just like with the soccer ball example, Hamiltonians can start
+        simple, and we add things to it to get more detailed properties of a 
+        system.
       </p>
 
       <p>

@@ -1,3 +1,5 @@
+import Equation, { X } from "../components/Equation";
+
 export default function Chapter6() {
   return (
     <article>
@@ -12,6 +14,9 @@ export default function Chapter6() {
       <p>
         TBC
       </p>
+
+      <Equation tex="i \hbar \frac{d}{dt} |\psi\rangle = H \, |\psi\rangle" />
+      
     </article>
   );
 }
