@@ -37,8 +37,8 @@ export default function Chapter1() {
       <h2>Simulating physics with computers</h2>
       
       <p>
-        If we want to add more physics to our soccer ball model -- like the
-        spin and aerodynamics of the ball -- to simulate more complex 
+        If we want to add more physics to our soccer ball model &mdash; like the
+        spin and aerodynamics of the ball &mdash; to simulate more complex 
         trajectories, the maths will eventually become too difficult to solve 
         by hand. 
         Luckily, computers are great at doing these types of maths and
