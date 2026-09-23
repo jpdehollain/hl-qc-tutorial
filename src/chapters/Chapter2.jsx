@@ -8,28 +8,34 @@ const BlochSphere = lazy(() => import("../components/BlochSphere"));
 export default function Chapter2() {
   return (
     <article>
-      <h1>What does a quantum system look like?</h1>
+      <h1>Quantum footballs</h1>
 
       <p>
         When we think of quantum, we often think about tiny things like
         electrons, photons and atoms. 
-        But what makes something quantum is not
-        its size, but the way it behaves, or more formally, the type of
-        mathematics that we need to use to describe it.
+        But what makes something quantum is not its size, but the way it 
+        behaves, or more formally, the type of mathematics that we need to 
+        use to describe it.
       </p>
 
       <p>
-        To describe a physical object we need two things: a description of the
-        object at a specific time -- or its <strong>state</strong> and a rule
-        that tells us how that state changes over time. 
-        This combination of state and rule we will call a <strong>system</strong>. 
-        In our football example, the state of the system can be the position of 
-        the ball and its velocity, and Newton's second law lets us predict how it 
-        will move.
+        To predict the movement of our football we need: some properties that 
+        we can observe or measure -- like its position in time, the ball's 
+        velocity and forces acting on it -- which can be translated into 
+        kinetic and potential energy, and a rule or equation -- Newton's second 
+        law -- that tells us how to combine these quantities to obtain a 
+        prediction of, e.g., the ball's position at a future time. 
       </p>
       
       <p>
-        Similarly, a quantum system is described by a <em>quantum state</em>, 
+        If our football lived in quantum land, we would need three analogous
+        similar ingredients which in quantum land are called: 
+        <ul>
+          <li>the <strong>quantum state</strong> -- ;</li>
+          <li>the <strong>Hamiltonian</strong> -- ;</li>
+          <li>and the <strong>Schr&ouml;dinger equation</strong> -- </li>
+        </ul>
+        ,
         which we will represent with the symbol <X>|\psi\rangle</X>. 
         To know how that state changes over time, we use a rule called the 
         Schr&ouml;dinger equation -- which has nothing to do with his more 
