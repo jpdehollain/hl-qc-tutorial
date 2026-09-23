@@ -109,10 +109,6 @@ export default function BlochSphere() {
     const labels = [
       { text: "|0\u27e9", pos: [0, 1.25, 0], color: "#f1eefa" },
       { text: "|1\u27e9", pos: [0, -1.25, 0], color: "#f1eefa" },
-      { text: "+", pos: [1.25, 0, 0], color: "#a89fc9" },
-      { text: "\u2212", pos: [-1.25, 0, 0], color: "#a89fc9" },
-      { text: "+i", pos: [0, 0, 1.25], color: "#a89fc9" },
-      { text: "\u2212i", pos: [0, 0, -1.25], color: "#a89fc9" },
     ];
     labels.forEach((l) => {
       const sprite = makeLabelSprite(l.text, l.color);
