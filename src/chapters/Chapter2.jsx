@@ -1,4 +1,5 @@
 import Equation, { X } from "../components/Equation";
+import Step from "../components/Step"
 
 export default function Chapter2() {
   return (
@@ -66,20 +67,37 @@ export default function Chapter2() {
       <Equation tex="|\psi\rangle = \begin{pmatrix} c_{tl} \\ c_{br} \end{pmatrix}" />
 
       <p>
-        where each <X>c</X> is related to the probabilities
-        of the ball being in the top left (<X>tl</X>) and bottom right (<X>br</X>) corners, respectively.
-        I say it in this way because quantum complicates things further and
+        where each <X>c</X> is <em>related</em> to the probability of the ball being in 
+        the top left (<X>tl</X>) and bottom right (<X>br</X>) corners, respectively.
+        I say "related" because quantum complicates things further and
         requires these numbers to be complex, but the probabilities can be
         extracted by a simple mathematical operation on the state.
       </p>
 
+      <Step title="Quiz time!" defaultOpen={true}>
+      <p>Here is one of the simplest quantum states we can have:</p>
+
+      <Equation tex="|\psi\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}" />
+
       <p>
-        This will be as far as I can take our quantum football example (which was 
-        probably already too far for the comfort of most physicists 😹).
-        I can't say many intuitive things about the <strong>Hamiltonian</strong> &mdash;{" "} 
-        the next ingredient of our quantum model, except to explain that it 
-        contains information about the potential and kinetic energy that our
-        quantum football is subjected to.
+        Using our quantum football example, can you explain what this state is
+        telling us?
+      </p>
+
+      <Step title="Hint">
+        What does it tell us about what we will see when we open our
+        eyes after kicking the ball?
+      </Step>
+
+      <p>Check your answer in the next chapter!</p>
+
+      </Step>
+
+      <p>
+        It's harder to think about a football analogy for the{" "}
+        <strong>Hamiltonian</strong> &mdash; the next ingredient of our quantum 
+        model; all I will say is that it contains information about the potential 
+        and kinetic energy that our quantum football is subjected to.
         It is represented by a square matrix, which needs to have the same{" "}
         <em>dimension</em> as the quantum state &mdash; for our example, it will
         need to be a <X>2\times2</X> matrix.
@@ -91,32 +109,10 @@ export default function Chapter2() {
 
       <p>
         The quantum state and Hamiltonian can now be fed into the{" "} 
-        <strong>Schr&ouml;dinger equation</strong> to predict what our quantum 
+        Schr&ouml;dinger equation to predict what our quantum 
         state will be at a later point in time.
-        For the purpose of this tutorial I will not show you what the equation 
-        looks like, but you just need to know that the solution to the 
-        Schr&ouml;dinger equation is a mathematical object called the{" "}
-        <strong>time-evolution operator</strong>. 
-        This operator is ver handy because if we multiply it by the quantum 
-        state at point in time, we can predict what the state will be at any 
-        other moment. 
-        This last sentence is written mathematically as:
-      </p>
-
-      <Equation tex="|\psi(t)\rangle = e^{-iHt/\hbar}\,|\psi(t=0)\rangle" />
-
-      <p>
-        this equation has some terms you may or may not have seen before:{" "}
-        <X>e^x</X> is the exponential function;{" "}
-        <X>i</X> is the imaginary unit, which tells us we're working with complex
-        numbers; 
-        and <X>\hbar</X> is the Planck constant, a fundamental constant of
-        nature that helps us work in manegeable units.
-      </p>
-
-      <p>
-        Now that we now how to contruct a quantum system, let's start using the
-        time-evolution operator to compute some quantum trajectories...
+        Let's do that in the next chapter, where we will try to understand what
+        means for a quantum state to change.
       </p>
 
     </article>

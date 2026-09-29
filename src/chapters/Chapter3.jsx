@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import Equation, { X } from "../components/Equation";
+import Step from "../components/Step";
 
 // three.js is a heavy dependency - only load it once someone is actually
 // reading this chapter, not as part of the initial page load.
@@ -10,31 +11,86 @@ export default function Chapter3() {
     <article>
       <h1>From football to Bloch sphere</h1>
       <p>
-        This chapter is the next piece of the build. Come back once it's
-        wired in.
+        We ended the previous chapter saying that we could plug in our quantum
+        state and Hamiltonian into the Schr&ouml;dinger equation to predict how
+        our state will change in time.
+        For the purpose of this tutorial I don't need to show you what the equation 
+        looks like (feel free to look it up &mdash; I find it quite pretty to look at 🤓),
+        I just need to skip to its solution: a mathematical object called 
+        the <strong>time-evolution operator</strong>.
+        This operator is very handy because if we multiply it by a quantum 
+        state known at an initial time, we can predict what the state will be at any 
+        other moment.
+        This last sentence is written mathematically as: 
       </p>
 
-      <h3>Step 1 &mdash; find the eigenvalues of X</h3>
+      <Equation tex="|\psi(t)\rangle = e^{-iHt}\,|\psi(t=0)\rangle" />
+
+      <p>
+        ...on the right hand side of this equation we have a state which we know 
+        at some moment in time which we will call time zero or <X>t = 0</X>. It
+        is being multiplied by the time-evolution operator{" "}
+        <Equation tex="e^{-iHt}" display={false} /> using any value of <X>t</X>{" "}
+        to find out what the state will become at that point in time.
+        The time evolution operator has some terms you may or may not have seen 
+        before: <X>e</X> is a mathematical constant called Euler's number &mdash; all
+        you need to know for this tutorial is that it has many useful 
+        mathematical properties; and <X>i</X> is the imaginary unit, which tells
+        us we're working with complex numbers.
+      </p>
+
+      <p>
+        Our job seems pretty straight forward at this point.
+        We know a quantum state, we know the Hamiltonian, we just need to
+        plug in the numbers into the equation... easy peasy right?
+      </p>
+
+      <p>
+        The tricky bit comes from the fact that quantum states are vectors and
+        Hamiltonians are matrices, which makes the maths a bit more complicated.
+        In fact, there an entire branch of mathematics, called{" "}
+        <strong>linear algebra</strong> that is dedicated to vectors and
+        matrices. 
+        Linear algebra is not only used for quantum physics, but
+        many applications across science, engineering and finance.
+        Keep this in mind for when you reach the final chapter 😉
+      </p>
+
+      <p>
+        Now let's plug in our state and Hamiltonian from the previous chapter, recall:
+      </p>
+
+      <Equation tex="H = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \;\; |\psi\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}" />
+
+      <Step title="Quiz answer">
+      <p>
+        Since the quantum state tells us about the probability of the ball being in 
+        the top left and bottom right corners [STOPED HERE]
+      </p>
+      </Step>
+
+      <Step title="Derivation of time evolution of the state">
+      <h3>Step 1 &mdash; find the eigenvalues of <X>H</X></h3>
       <p>
         A vector <Equation tex="v" display={false} /> is an eigenvector of{" "}
-        <Equation tex="X" display={false} /> with eigenvalue{" "}
+        <Equation tex="H" display={false} /> with eigenvalue{" "}
         <Equation tex="\lambda" display={false} /> if{" "}
-        <Equation tex="Xv=\lambda v" display={false} />, which we can
-        rewrite as <Equation tex="(X-\lambda I)v = 0" display={false} />. A
+        <Equation tex="Hv=\lambda v" display={false} />, which we can
+        rewrite as <Equation tex="(H-\lambda I)v = 0" display={false} />. A
         nonzero <Equation tex="v" display={false} /> solving that equation
-        only exists when <Equation tex="X-\lambda I" display={false} /> is
+        only exists when <Equation tex="H-\lambda I" display={false} /> is
         singular, i.e. when its determinant vanishes:
       </p>
-      <Equation tex="\det(X-\lambda I) = \det\begin{pmatrix} -\lambda & 1 \\ 1 & -\lambda \end{pmatrix} = \lambda^2 - 1 = 0" />
+      <Equation tex="\det(H-\lambda I) = \det\begin{pmatrix} -\lambda & 1 \\ 1 & -\lambda \end{pmatrix} = \lambda^2 - 1 = 0" />
       <p>
         which gives the two eigenvalues <Equation tex="\lambda = +1" display={false} />{" "}
         and <Equation tex="\lambda = -1" display={false} />.
       </p>
 
-      <h3>Step 2 &mdash; find the eigenvectors of X</h3>
+      <h3>Step 2 &mdash; find the eigenvectors of <X>H</X></h3>
       <p>
         For each eigenvalue, solve{" "}
-        <Equation tex="(X-\lambda I)v=0" display={false} /> for{" "}
+        <Equation tex="(H-\lambda I)v=0" display={false} /> for{" "}
         <Equation tex="v=\begin{pmatrix}v_1\\v_2\end{pmatrix}" display={false} />.
         For <Equation tex="\lambda=+1" display={false} />:
       </p>
@@ -46,9 +102,9 @@ export default function Chapter3() {
         <Equation tex="v_1=1" display={false} /> and normalise the result to
         unit length. That gives the two eigenvectors:
       </p>
-      <Equation tex="v_{+} = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 1 \end{pmatrix}, \;\; Xv_+ = +1\,v_+ \qquad\qquad v_{-} = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ -1 \end{pmatrix}, \;\; Xv_- = -1\,v_-" />
+      <Equation tex="v_{+} = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 1 \end{pmatrix}, \;\; Hv_+ = +1\,v_+ \qquad\qquad v_{-} = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ -1 \end{pmatrix}, \;\; Hv_- = -1\,v_-" />
 
-      <h3>Step 3 &mdash; diagonalise X</h3>
+      <h3>Step 3 &mdash; diagonalise <X>H</X></h3>
       <p>
         Collect the eigenvectors as the columns of a matrix{" "}
         <Equation tex="P" display={false} />, and the eigenvalues as the
@@ -56,8 +112,8 @@ export default function Chapter3() {
       </p>
       <Equation tex="P = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}, \qquad D = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}" />
       <p>
-        These satisfy <Equation tex="X = P D P^{-1}" display={false} /> &mdash;
-        that's what it means to diagonalise <Equation tex="X" display={false} />.
+        These satisfy <Equation tex="H = P D P^{-1}" display={false} /> &mdash;
+        that's what it means to diagonalise <Equation tex="H" display={false} />.
         This particular <Equation tex="P" display={false} /> has a convenient
         property, checkable directly by multiplying it by itself:{" "}
         <Equation tex="P^2 = I" display={false} />, so{" "}
@@ -72,18 +128,18 @@ export default function Chapter3() {
       </p>
       <Equation tex="e^{-iDt} = \begin{pmatrix} e^{-it} & 0 \\ 0 & e^{+it} \end{pmatrix}" />
       <p>
-        Because <Equation tex="X=PDP^{-1}" display={false} />, the same
+        Because <Equation tex="H=PDP^{-1}" display={false} />, the same
         relationship carries over to their exponentials:{" "}
-        <Equation tex="e^{-iXt} = P\,e^{-iDt}\,P^{-1}" display={false} />.
+        <Equation tex="e^{-iHt} = P\,e^{-iDt}\,P^{-1}" display={false} />.
         Multiplying the three matrices out (using{" "}
         <Equation tex="P^{-1}=P" display={false} /> from Step&nbsp;3):
       </p>
-      <Equation tex="e^{-iXt} = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}\begin{pmatrix} e^{-it} & 0 \\ 0 & e^{+it} \end{pmatrix}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix} = \begin{pmatrix} \cos t & -i\sin t \\ -i\sin t & \cos t \end{pmatrix}" />
+      <Equation tex="e^{-iHt} = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}\begin{pmatrix} e^{-it} & 0 \\ 0 & e^{+it} \end{pmatrix}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix} = \begin{pmatrix} \cos t & -i\sin t \\ -i\sin t & \cos t \end{pmatrix}" />
       <p>
         (the last simplification just uses{" "}
         <Equation tex="e^{-it}+e^{it}=2\cos t" display={false} /> and{" "}
         <Equation tex="e^{-it}-e^{it}=-2i\sin t" display={false} />). We now
-        have <Equation tex="e^{-iXt}" display={false} /> itself, as an
+        have <Equation tex="e^{-iHt}" display={false} /> itself, as an
         explicit matrix &mdash; before applying it to any particular state.
       </p>
 
@@ -94,13 +150,14 @@ export default function Chapter3() {
         multiplication &mdash; exactly what a computer will do for us in the
         next chapter:
       </p>
-      <Equation tex="\psi(t) = e^{-iXt}\begin{pmatrix}1\\0\end{pmatrix} = \begin{pmatrix} \cos t & -i\sin t \\ -i\sin t & \cos t \end{pmatrix}\begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} \cos t \\ -i\sin t \end{pmatrix}" />
+      <Equation tex="\psi(t) = e^{-iHt}\begin{pmatrix}1\\0\end{pmatrix} = \begin{pmatrix} \cos t & -i\sin t \\ -i\sin t & \cos t \end{pmatrix}\begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} \cos t \\ -i\sin t \end{pmatrix}" />
       <Equation tex="\boxed{\;\psi(t) = \begin{pmatrix} \cos t \\ -i\sin t \end{pmatrix}\;}" />
+      </Step>
 
       <p>
-        That's <Equation tex="e^{-iXt}\begin{pmatrix}1\\0\end{pmatrix}" display={false} />{" "}
+        That's <Equation tex="e^{-iHt}\begin{pmatrix}1\\0\end{pmatrix}" display={false} />{" "}
         computed completely by hand: find the eigenvalues and eigenvectors
-        of <Equation tex="X" display={false} />, use them to diagonalise it,
+        of <Equation tex="H" display={false} />, use them to diagonalise it,
         exponentiate the (trivial) diagonal part, multiply the three
         matrices back out, then multiply the result by the initial state
         vector. That's also <em>exactly</em> the sequence a computer follows
@@ -131,7 +188,7 @@ export default function Chapter3() {
         leaves the plane <Equation tex="x=0" display={false} /> &mdash; it
         simply <strong>rotates in a circle around the x-axis</strong> at
         twice the rate you might naively guess from the Hamiltonian.
-        Solving the Schr&ouml;dinger equation for H&nbsp;=&nbsp;X turned out
+        Solving the Schr&ouml;dinger equation for <X>H</X> turned out
         to mean: <em>spin around the x-axis</em>. Drag the slider below (or
         press play) to watch it happen.
       </p>

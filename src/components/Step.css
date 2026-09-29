@@ -1,0 +1,51 @@
+.step {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-panel);
+  padding: 0 1.1rem;
+  margin: 1.5rem 0;
+}
+
+.step-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.9rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.step-summary::-webkit-details-marker {
+  display: none;
+}
+
+.step-summary::before {
+  content: "\25b8";
+  color: var(--accent-2);
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.step[open] > .step-summary::before {
+  transform: rotate(90deg);
+}
+
+.step-summary:hover {
+  color: var(--accent-2);
+}
+
+.step-body {
+  padding-bottom: 1.2rem;
+}
+
+.step-body > *:first-child {
+  margin-top: 0;
+}
+
+.step-body > *:last-child {
+  margin-bottom: 0;
+}
