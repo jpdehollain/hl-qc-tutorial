@@ -64,10 +64,20 @@ export default function Chapter3() {
 
       <Step title="Quiz answer">
       <p>
-        Since the quantum state tells us about the probability of the ball being in 
-        the top left and bottom right corners [STOPED HERE]
+        Since the quantum state tells us about the probability that we will see
+        the ball on the top left or bottom right of the goal, the specific
+        state <Equation tex="\begin{pmatrix} 0 \\ 1 \end{pmatrix}" display={false} />{" "}
+        is telling us that we will <strong>always</strong> &mdash; with a 100%
+        probability &mdash; see the ball in the bottom right corner.
+        Kicking the ball in way that prepares our quantum football in this state
+        makes it behave like a classical football, since we always know where
+        it is going to go!
       </p>
       </Step>
+
+      <p>
+        [DIAGONALIZATION]
+      </p>
 
       <Step title="Derivation of time evolution of the state">
       <h3>Step 1 &mdash; find the eigenvalues of <X>H</X></h3>
