@@ -42,27 +42,13 @@ export default function Chapter3() {
       <p>
         Our job seems pretty straight forward at this point.
         We know a quantum state, we know the Hamiltonian, we just need to
-        plug in the numbers into the equation... easy peasy right?
-      </p>
-
-      <p>
-        The tricky bit comes from the fact that quantum states are vectors and
-        Hamiltonians are matrices, which makes the maths a bit more complicated.
-        In fact, there an entire branch of mathematics, called{" "}
-        <strong>linear algebra</strong> that is dedicated to vectors and
-        matrices. 
-        Linear algebra is not only used for quantum physics, but
-        many applications across science, engineering and finance.
-        Keep this in mind for when you reach the final chapter 😉
-      </p>
-
-      <p>
-        Now let's plug in our state and Hamiltonian from the previous chapter, recall:
+        plug in the numbers into the equation... recall our state and Hamiltonian
+        from the previous chapter:
       </p>
 
       <Equation tex="H = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \;\; |\psi\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}" />
 
-      <Step title="Quiz answer">
+      <Step title="... and this is probabbly a good point to check the answer to the quiz in the previous chapter">
       <p>
         Since the quantum state tells us about the probability that we will see
         the ball on the top left or bottom right of the goal, the specific
@@ -75,8 +61,27 @@ export default function Chapter3() {
       </p>
       </Step>
 
+      <p>then plugging them into the time-evolution equation:</p>
+
+      <Equation tex="|\psi(t)\rangle = e^{-i\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}t} \cdot \begin{pmatrix} 0 \\ 1 \end{pmatrix} =\,???" />
+
+      <p>easy peasy right? 🤔</p>
+      
+      <h2>Linear algebra: vectors and matrices</h2>
+      
       <p>
-        [DIAGONALIZATION]
+        What makes this equation more tricky to solve is the fact that quantum
+        states are vectors and Hamiltonians are matrices.
+        In fact, there an entire branch of mathematics, called{" "}
+        <strong>linear algebra</strong> that is dedicated to vectors and
+        matrices. 
+        Linear algebra is not only used for quantum physics, but
+        many applications across science, engineering and finance.
+        Keep this in mind for when you reach the final chapter 😉
+      </p>
+
+      <p>
+      [MATRIX EXPONENTIALS ARE HARD FOR NORMAL COMPUTERS]
       </p>
 
       <Step title="Derivation of time evolution of the state">
