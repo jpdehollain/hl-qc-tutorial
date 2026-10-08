@@ -46,7 +46,7 @@ export default function Chapter3() {
         from the previous chapter:
       </p>
 
-      <Equation tex="H = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \;\; |\psi\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}" />
+      <Equation tex="H = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \;\; |\psi(t=0)\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}" />
 
       <Step title="... and this is probabbly a good point to check the answer to the quiz in the previous chapter">
       <p>
@@ -81,8 +81,26 @@ export default function Chapter3() {
       </p>
 
       <p>
-      [MATRIX EXPONENTIALS ARE HARD FOR NORMAL COMPUTERS]
+        This is as far into the maths as you need to go for this tutorial, but
+        it was important to get to the matrix exponential, because it is one of
+        the operations that becomes impossible for computers to do, when the
+        matrix becomes too large. In constrast, since quantum systems naturally
+        evolve following these maths, they effectively "solve" the matrix
+        exponential by just letting them be on their own and only looking at
+        them at the time we want to know about their state.
       </p>
+
+      <h2>So what does the solution look like?</h2>
+
+      <p>
+        For small matrices like the one in our example, the time-evolution
+        equation above is not too hard to solve by hand if you know have taken a
+        basic linear algebra course.
+        The solution is shown below, and if you are curious about how to get
+        there, you can expand the box below the solution to see the step-by-step derivation.
+      </p>
+
+      <Equation tex="|\psi(t)\rangle = \begin{pmatrix} \cos t \\ -i\sin t \end{pmatrix}" />
 
       <Step title="Derivation of time evolution of the state">
       <h3>Step 1 &mdash; find the eigenvalues of <X>H</X></h3>
@@ -170,15 +188,25 @@ export default function Chapter3() {
       </Step>
 
       <p>
-        That's <Equation tex="e^{-iHt}\begin{pmatrix}1\\0\end{pmatrix}" display={false} />{" "}
-        computed completely by hand: find the eigenvalues and eigenvectors
-        of <Equation tex="H" display={false} />, use them to diagonalise it,
-        exponentiate the (trivial) diagonal part, multiply the three
-        matrices back out, then multiply the result by the initial state
-        vector. That's also <em>exactly</em> the sequence a computer follows
-        in the next chapter &mdash; diagonalise, exponentiate, multiply
-        &mdash; the only difference being that it can do it for matrices far
-        too big to diagonalise by hand.
+        The <X>cos</X> and <X>sin</X> terms in the solution are the{" "}
+        <strong>cosine</strong> and <strong>sine</strong> functions, which
+        cycle between -1 and 1 every 2 seconds.
+        The cycling happens is such a way that when the <X>cos</X> term
+        is <X>\pm 1</X>, the <X>sin</X> term is 0, and vice versa.
+        Furthermore, they cycle in such a way that at any point in time, the
+        probabilities of seeing the ball in the top left or bottom right corners
+        of the goal always add up to 1, as they should.
+      </p>
+
+      <p>
+        The solution is telling us that when our quantum football starts in the
+        bottom right corner of the goal, we don't look at it for a while and it
+        is subjected to an energy described by this hamiltonian, the ball will
+        start to "move" towards the top left corner.
+        It doesn't move by traversing across the goal, but as time goes on, the
+        probability of us seeing it in the top left corner increases.
+        If we wait exactly 1 second, we know for sure that if we open our eyes
+        we will see the ball in the top left corner.
       </p>
 
       <h2>Reading the answer on a sphere</h2>
