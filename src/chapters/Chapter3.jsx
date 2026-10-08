@@ -46,7 +46,7 @@ export default function Chapter3() {
         from the previous chapter:
       </p>
 
-      <Equation tex="H = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \;\; |\psi(t=0)\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}" />
+      <Equation tex="H = \frac{\pi}{2} \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \;\; |\psi(t=0)\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}" />
 
       <Step title="... and this is probabbly a good point to check the answer to the quiz in the previous chapter">
       <p>
@@ -63,7 +63,7 @@ export default function Chapter3() {
 
       <p>then plugging them into the time-evolution equation:</p>
 
-      <Equation tex="|\psi(t)\rangle = e^{-i\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}t} \cdot \begin{pmatrix} 0 \\ 1 \end{pmatrix} =\,???" />
+      <Equation tex="|\psi(t)\rangle = e^{-\frac{i \pi}{2} \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}t} \cdot \begin{pmatrix} 0 \\ 1 \end{pmatrix} =\,???" />
 
       <p>easy peasy right? 🤔</p>
       
@@ -100,9 +100,17 @@ export default function Chapter3() {
         there, you can expand the box below the solution to see the step-by-step derivation.
       </p>
 
-      <Equation tex="|\psi(t)\rangle = \begin{pmatrix} \cos t \\ -i\sin t \end{pmatrix}" />
+      <Equation tex="|\psi(t)\rangle = \begin{pmatrix} \cos \frac{\pi}{2} t \\ -i\sin \frac{\pi}{2} t \end{pmatrix}" />
 
       <Step title="Derivation of time evolution of the state">
+
+      <p>
+      <em>
+        Note: in this derivation, we ignore the factor of <X>{"\\frac{\\pi}{2}"}</X> for
+        simplicity.
+      </em>
+      </p>
+
       <h3>Step 1 &mdash; find the eigenvalues of <X>H</X></h3>
       <p>
         A vector <Equation tex="v" display={false} /> is an eigenvector of{" "}
@@ -208,6 +216,14 @@ export default function Chapter3() {
         If we wait exactly 1 second, we know for sure that if we open our eyes
         we will see the ball in the top left corner.
       </p>
+
+      <Step title="Can you now guess why we put the pi/2 in front of the Hamiltonian?">
+      <p>
+        Just for the convenience of making the ball moves from one corner to the
+        other in exactly 1 second.
+        If it wasn't there, there would be a factor of <X>\pi</X> in the cycling time.
+      </p>
+      </Step>
 
       <h2>Reading the answer on a sphere</h2>
 

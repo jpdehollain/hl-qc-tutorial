@@ -105,10 +105,17 @@ export default function Chapter2() {
         &mdash; can look like this:
       </p>
 
-      <Equation tex="H = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}" />
+      <Equation tex="H = \frac{\pi}{2} \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}" />
 
       <p>
-        The quantum state and Hamiltonian can now be fed into the{" "} 
+        The <X>{"\\frac{\\pi}{2}"}</X> in front of the matrix &mdash; the constant
+        <strong>pi</strong> divided by 2 &mdash; just means that every value
+        inside the matrix is multiplied by that constant.
+        It is there for a convience that will become clear in the next chapter.
+      </p>
+
+      <p>
+        The quantum state <X>|\psi\rangle</X> and Hamiltonian <X>H</X> can now be fed into the{" "} 
         Schr&ouml;dinger equation to predict what our quantum 
         state will be at a later point in time.
         Let's do that in the next chapter, where we will try to understand what

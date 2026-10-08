@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import Equation from "./Equation";
+import Equation, { X } from "./Equation";
 import "./BlochSphere.css";
 
 // Bloch-vector trajectory for |psi(t)> = cos(t)|0> - i sin(t)|1>,
@@ -10,8 +10,8 @@ import "./BlochSphere.css";
 function blochVector(t) {
   return {
     x: 0,
-    y: -Math.sin(2 * t),
-    z: Math.cos(2 * t),
+    y: -Math.sin(Math.PI * t),
+    z: Math.cos(Math.PI * t),
   };
 }
 
@@ -107,8 +107,8 @@ export default function BlochSphere() {
 
     // axis labels (three.js: x, y, z <- bloch: x, z, y, see mapping below)
     const labels = [
-      { text: "|0\u27e9", pos: [0, 1.25, 0], color: "#f1eefa" },
-      { text: "|1\u27e9", pos: [0, -1.25, 0], color: "#f1eefa" },
+      { text: "|tl\u27e9", pos: [0, 1.25, 0], color: "#f1eefa" },
+      { text: "|br\u27e9", pos: [0, -1.25, 0], color: "#f1eefa" },
     ];
     labels.forEach((l) => {
       const sprite = makeLabelSprite(l.text, l.color);
@@ -163,7 +163,7 @@ export default function BlochSphere() {
     if (!playing) return;
     let raf;
     const step = () => {
-      setT((prev) => (prev + 0.008) % (2 * Math.PI));
+      setT((prev) => (prev + 0.008) % (2));
       raf = requestAnimationFrame(step);
     };
     raf = requestAnimationFrame(step);
@@ -171,19 +171,19 @@ export default function BlochSphere() {
   }, [playing]);
 
   const bv = blochVector(t);
-  const a = Math.cos(t);
-  const b = Math.sin(t);
+  const a = Math.cos(Math.PI / 2 * t);
+  const b = Math.sin(Math.PI / 2 * t);
 
   return (
     <div className="bloch">
       <div className="bloch-canvas" ref={mountRef} />
       <div className="bloch-controls">
         <div className="bloch-readout">
-          <Equation tex={`|\\psi(t)\\rangle = \\cos(t)\\,|0\\rangle \\; - \\; i\\sin(t)\\,|1\\rangle`} />
+          <Equation tex={`|\\psi(t)\\rangle = \\begin{pmatrix} c_{tl} \\\\ c_{br} \\end{pmatrix} = \\begin{pmatrix} \\cos\\left(\\frac{\\pi}{2} t\\right) \\\\ -i\\sin\\left(\\frac{\\pi}{2} t\\right) \\end{pmatrix}`} />
           <div className="bloch-readout-values">
             <span>t = {t.toFixed(2)}</span>
-            <span>a = {a.toFixed(2)}</span>
-            <span>b = {(-b).toFixed(2)}i</span>
+            <span><X>{"P_{tl}"}</X> = {(a*a).toFixed(2)}</span>
+            <span><X>{"P_{br}"}</X> = {(b*b).toFixed(2)}</span>
           </div>
         </div>
         <div className="bloch-slider-row">
@@ -197,7 +197,7 @@ export default function BlochSphere() {
           <input
             type="range"
             min={0}
-            max={2 * Math.PI}
+            max={2}
             step={0.001}
             value={t}
             onChange={(e) => {
@@ -208,10 +208,10 @@ export default function BlochSphere() {
         </div>
         <div className="bloch-ticks">
           <span>0</span>
-          <span>&pi;/2</span>
-          <span>&pi;</span>
-          <span>3&pi;/2</span>
-          <span>2&pi;</span>
+          <span>0.5</span>
+          <span>1</span>
+          <span>1.5</span>
+          <span>2</span>
         </div>
       </div>
     </div>
