@@ -84,7 +84,8 @@ export default function Chapter3() {
         This is as far into the maths as you need to go for this tutorial, but
         it was important to get to the matrix exponential, because it is one of
         the operations that becomes impossible for computers to do, when the
-        matrix becomes too large. In constrast, since quantum systems naturally
+        matrix becomes too large&mdash;as we will demonstrate in the following
+        chapters. In constrast, since quantum systems naturally
         evolve following these maths, they effectively "solve" the matrix
         exponential by just letting them be on their own and only looking at
         them at the time we want to know about their state.
@@ -94,7 +95,7 @@ export default function Chapter3() {
 
       <p>
         For small matrices like the one in our example, the time-evolution
-        equation above is not too hard to solve by hand if you know have taken a
+        equation above is not too hard to solve by hand if you have taken a
         basic linear algebra course.
         The solution is shown below, and if you are curious about how to get
         there, you can expand the box below the solution to see the step-by-step derivation.
@@ -199,7 +200,7 @@ export default function Chapter3() {
         The <X>cos</X> and <X>sin</X> terms in the solution are the{" "}
         <strong>cosine</strong> and <strong>sine</strong> functions, which
         cycle between -1 and 1 every 2 seconds.
-        The cycling happens is such a way that when the <X>cos</X> term
+        The cycling happens in such a way that when the <X>cos</X> term
         is <X>\pm 1</X>, the <X>sin</X> term is 0, and vice versa.
         Furthermore, they cycle in such a way that at any point in time, the
         probabilities of seeing the ball in the top left or bottom right corners
@@ -217,7 +218,7 @@ export default function Chapter3() {
         we will see the ball in the top left corner.
       </p>
 
-      <Step title="Can you now guess why we put the pi/2 in front of the Hamiltonian?">
+      <Step title="Can you guess why we put the pi/2 in front of the Hamiltonian?">
       <p>
         Just for the convenience of making the ball moves from one corner to the
         other in exactly 1 second.
@@ -225,31 +226,34 @@ export default function Chapter3() {
       </p>
       </Step>
 
-      <h2>Reading the answer on a sphere</h2>
+      <h2>The Bloch Sphere - A visual representation</h2>
 
       <p>
-        A single qubit's state can always be pictured as a point on the
-        surface of a unit sphere, called the <strong>Bloch sphere</strong>.
-        The north pole is <Equation tex="|0\rangle" display={false} />, the
-        south pole is <Equation tex="|1\rangle" display={false} />, and the
-        equator holds every equal combination of the two, distinguished only
-        by phase. For a state{" "}
-        <Equation tex="|\psi\rangle=a|0\rangle+b|1\rangle" display={false} />,
-        its position is:
+        So far, we have worked with the simplest existing quantum state
+        &mdash;one that only has two possible observation outcomes.
+        This type of state is called a quantum bit or <strong>qubit</strong>,
+        because it is analogous to a classical bit, which can only be 0 or 1.
       </p>
-      <Equation tex="(x,y,z) = \big(2\,\mathrm{Re}(\bar a b),\;\; 2\,\mathrm{Im}(\bar a b),\;\; |a|^2-|b|^2\big)" />
 
       <p>
-        Plug our solution in and something clean falls out:{" "}
-        <Equation tex="x(t)=0" display={false} />,{" "}
-        <Equation tex="y(t)=-\sin(2t)" display={false} />,{" "}
-        <Equation tex="z(t)=\cos(2t)" display={false} />. The point never
-        leaves the plane <Equation tex="x=0" display={false} /> &mdash; it
-        simply <strong>rotates in a circle around the x-axis</strong> at
-        twice the rate you might naively guess from the Hamiltonian.
-        Solving the Schr&ouml;dinger equation for <X>H</X> turned out
-        to mean: <em>spin around the x-axis</em>. Drag the slider below (or
-        press play) to watch it happen.
+        The state of our quantum football can be pictured as a fixed-length
+        arrow with a fixed origin, which can point in any direction&mdash;describing
+        the surface of a sphere, called the <strong>Bloch sphere</strong>.
+        When the arrow points north, we know with 100% certainty that we will
+        see the ball in the bottom-right corner,  in other words, the north pole is{" "}
+        <Equation tex="|br\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}" display={false} />.
+        Similarly, if the arrow points at the south pole we always see the ball in
+        the top-right corner&mdash;or{" "}
+        <Equation tex="|tl\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}" display={false} />.
+        At the equator, the probability of seeing the ball in either corner is 50%,
+        but notice that here the arrow can point in many directions describing a circle
+        &mdash;this is known as the <strong>phase</strong> of the state, which gives the
+        quantum state its wave-like properties.
+      </p>
+
+      <p>
+        Below we show what the quantum football evolution that we derived above
+        looks like on the Bloch sphere.
       </p>
 
       <Suspense fallback={<div className="bloch-loading">Loading the sphere&hellip;</div>}>

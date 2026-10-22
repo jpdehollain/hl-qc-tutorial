@@ -107,8 +107,8 @@ export default function BlochSphere() {
 
     // axis labels (three.js: x, y, z <- bloch: x, z, y, see mapping below)
     const labels = [
-      { text: "|tl\u27e9", pos: [0, 1.25, 0], color: "#f1eefa" },
-      { text: "|br\u27e9", pos: [0, -1.25, 0], color: "#f1eefa" },
+      { text: "|br\u27e9", pos: [0, 1.25, 0], color: "#f1eefa" },
+      { text: "|tl\u27e9", pos: [0, -1.25, 0], color: "#f1eefa" },
     ];
     labels.forEach((l) => {
       const sprite = makeLabelSprite(l.text, l.color);
@@ -182,8 +182,8 @@ export default function BlochSphere() {
           <Equation tex={`|\\psi(t)\\rangle = \\begin{pmatrix} c_{tl} \\\\ c_{br} \\end{pmatrix} = \\begin{pmatrix} \\cos\\left(\\frac{\\pi}{2} t\\right) \\\\ -i\\sin\\left(\\frac{\\pi}{2} t\\right) \\end{pmatrix}`} />
           <div className="bloch-readout-values">
             <span>t = {t.toFixed(2)}</span>
-            <span><X>{"P_{tl}"}</X> = {(a*a).toFixed(2)}</span>
-            <span><X>{"P_{br}"}</X> = {(b*b).toFixed(2)}</span>
+            <span><X>{"P_{br}"}</X> = {(a*a).toFixed(2)}</span>
+            <span><X>{"P_{tl}"}</X> = {(b*b).toFixed(2)}</span>
           </div>
         </div>
         <div className="bloch-slider-row">
