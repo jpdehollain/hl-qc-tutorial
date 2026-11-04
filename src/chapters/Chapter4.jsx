@@ -4,7 +4,7 @@ import Step from "../components/Step";
 export default function Chapter4() {
   return (
     <article>
-      <h1>Two footballs, two qubits</h1>
+      <h1>Qubits and simulations</h1>
       <p>
         So far I have been using the football analogy to provide an intuitive
         visualisation of quantum systems.
