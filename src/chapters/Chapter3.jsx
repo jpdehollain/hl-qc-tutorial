@@ -254,6 +254,7 @@ export default function Chapter3() {
       <p>
         Below we show what the quantum football evolution that we derived above
         looks like on the Bloch sphere.
+        Feel free to play with the slider to see how the state changes over time.
       </p>
 
       <Suspense fallback={<div className="bloch-loading">Loading the sphere&hellip;</div>}>
@@ -261,13 +262,18 @@ export default function Chapter3() {
       </Suspense>
 
       <p>
-        This is the general pattern, not a coincidence of this particular{" "}
-        <Equation tex="H" display={false} />: for a single qubit, every
-        Hamiltonian generates a rotation of the Bloch sphere around some
-        axis, at some rate, both fixed by the Hamiltonian. Two qubits will
-        turn out to be a very different story.
+        This rotation of the qubit state around the Bloch sphere is the general solution
+        for any fixed Hamiltonian.
+        What can be changed with different Hamiltonians is the axis and speed of rotation.
       </p>
 
+      <p>
+        In the next chapter we will increase the level of complexity in our quantum system,
+        by adding another interacting object.
+        I will also show you how to use a computer to simulate the evolution which will
+        set us up to understand what happens when we keep increasing the size of our
+        quantum system.
+      </p>
     </article>
   );
 }

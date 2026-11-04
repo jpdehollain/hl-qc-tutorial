@@ -4,9 +4,9 @@ const CHAPTERS = [
   { id: 1, title: "Physics in the quantum world", accent: "var(--accent-1)" },
   { id: 2, title: "Quantum footballs", accent: "var(--accent-2)" },
   { id: 3, title: "From football to Bloch sphere", accent: "var(--accent-3)" },
-  { id: 4, title: "Scaling up", accent: "var(--accent-4)" },
-  { id: 5, title: "Where this goes", accent: "var(--accent-5)" },
-  { id: 6, title: "Appendix: Derivations", accent: "var(--accent-6)" },
+  { id: 4, title: "Two footballs, two qubits", accent: "var(--accent-4)" },
+  { id: 5, title: "Scaling up", accent: "var(--accent-5)" },
+  { id: 6, title: "Where this goes", accent: "var(--accent-6)" },
 ];
 
 export default function Sidebar({ current, onSelect }) {

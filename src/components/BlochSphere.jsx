@@ -207,11 +207,11 @@ export default function BlochSphere() {
           />
         </div>
         <div className="bloch-ticks">
-          <span>0</span>
-          <span>0.5</span>
-          <span>1</span>
-          <span>1.5</span>
-          <span>2</span>
+          <span>0s</span>
+          <span>0.5s</span>
+          <span>1s</span>
+          <span>1.5s</span>
+          <span>2s</span>
         </div>
       </div>
     </div>
