@@ -5,8 +5,6 @@ export default function Chapter1() {
     <article>
       <h1>Physics in the quantum world</h1>
 
-      <h2>Intro to this tutorial</h2>
-      
       <p>
         If you have read news articles about quantum computers but don't really
         get what makes them different from ordinary computers, this tutorial is
@@ -24,8 +22,9 @@ export default function Chapter1() {
         If you remember one thing from high school physics, it is probably how to
         predict the motion of a ball, using Newton's laws. 
         For example, if a football is kicked from the penalty spot with a 
-        velocity of 25 metres per second, we can calculate how long it will take 
-        to reach the goal 11 metres away, with some simple maths:{" "}
+        velocity <X>v</X> of 25 metres per second, we can calculate the
+        time <X>t</X> it will take to reach the goal from a distance{" "}
+        <X>d</X> of 11 metres away, with some simple maths:{" "}
         <Equation tex="t = \frac{d}{v} = \frac{11\text{ m}}{25\text{ m/s}}
         = 0.44\text{ s}" display={false} />.
         With sligthly more complicated maths, we can predict the entire 

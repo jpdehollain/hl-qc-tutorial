@@ -60,8 +60,9 @@ export default function Chapter2() {
         The position of the ball just before we open our eyes can no longer be
         described by a single number, instead we need a number that relates to
         the probability of the ball being in one of the two corners of the goal.
-        A <strong>quantum state</strong> is therefore represented by a vector of 
-        numbers, which in our example may look like this:
+        A <strong>quantum state</strong> is therefore represented by a column of 
+        numbers&mdash;known as a <strong>vector</strong>&mdash;which in our
+        example may look like this:
       </p>
 
       <Equation tex="|\psi\rangle = \begin{pmatrix} c_{tl} \\ c_{br} \end{pmatrix}" />
@@ -69,8 +70,8 @@ export default function Chapter2() {
       <p>
         where each <X>c</X> is <em>related</em> to the probability of the ball being in 
         the top left (<X>tl</X>) and bottom right (<X>br</X>) corners, respectively.
-        I say "related" because quantum complicates things further and
-        requires these numbers to be complex, but the probabilities can be
+        I say "related" because they are complex numbers that contain additional
+        important information, but the probabilities can be
         extracted by a simple mathematical operation on the state.
       </p>
 
@@ -98,8 +99,10 @@ export default function Chapter2() {
         <strong>Hamiltonian</strong> &mdash; the next ingredient of our quantum 
         model; all I will say is that it contains information about the potential 
         and kinetic energy that our quantum football is subjected to.
-        It is represented by a square matrix, which needs to have the same{" "}
-        <em>dimension</em> as the quantum state &mdash; for our example, it will
+        It is represented by a mathematical object called a <strong>matrix</strong>,
+        which is a grid of numbers that follow a specific set of rules to
+        perform operations. The Hamiltonian matrix needs to be square and have
+        the same <em>dimension</em> as the quantum state &mdash; for our example, it will
         need to be a <X>2\times2</X> matrix.
         A simple Hamiltonian &mdash; which we will work with in the next chapter{" "} 
         &mdash; can look like this:
@@ -108,7 +111,7 @@ export default function Chapter2() {
       <Equation tex="H = \frac{\pi}{2} \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}" />
 
       <p>
-        The <X>{"\\frac{\\pi}{2}"}</X> in front of the matrix &mdash; the constant
+        The <X>{"\\frac{\\pi}{2}"}</X> in front of the matrix &mdash; the constant{" "}
         <strong>pi</strong> divided by 2 &mdash; just means that every value
         inside the matrix is multiplied by that constant.
         It is there for a convience that will become clear in the next chapter.
