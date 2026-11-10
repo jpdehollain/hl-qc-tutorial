@@ -201,11 +201,16 @@ export default function BlochPlayer({ titles = [""], times, data, readout, idleT
   useEffect(() => {
     if (!playing || !duration) return;
     let frame;
-    let last = performance.now();
+    let last = null;
     const tick = (now) => {
-      const dt = (now - last) / 1000;
+      // requestAnimationFrame timestamps can be slightly *earlier* than
+      // performance.now(), so make sure time never runs backwards.
+      const dt = last === null ? 0 : Math.max(0, (now - last) / 1000);
       last = now;
-      setT((prev) => (prev + dt >= duration ? (prev + dt) % duration : prev + dt));
+      setT((prev) => {
+        const next = prev + dt;
+        return next >= duration ? next % duration : next;
+      });
       frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
@@ -213,7 +218,7 @@ export default function BlochPlayer({ titles = [""], times, data, readout, idleT
   }, [playing, duration]);
 
   const n = ready ? times.length : 0;
-  const position = ready ? Math.min((t / duration) * (n - 1), n - 1) : 0;
+  const position = ready ? Math.min(Math.max((t / duration) * (n - 1), 0), n - 1) : 0;
   const i0 = ready ? Math.min(Math.floor(position), n - 2) : 0;
   const frac = position - i0;
   const current = (points) => points[i0].map((v, k) => v + (points[i0 + 1][k] - v) * frac);

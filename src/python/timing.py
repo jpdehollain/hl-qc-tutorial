@@ -2,6 +2,7 @@ import time
 import numpy as np
 
 X = np.array([[0, 1], [1, 0]], dtype=complex)
+Y = np.array([[0, -1j], [1j, 0]], dtype=complex)
 Z = np.array([[1, 0], [0, -1]], dtype=complex)
 
 
@@ -25,7 +26,7 @@ H_one = (np.pi / 2) * X
 psi_one = np.array([1, 0], dtype=complex)
 
 # Two qubits: a 4x4 matrix
-H_two = (np.pi / 4) * np.kron(Z, Z)
+H_two = (np.pi / 4) * (np.kron(X, X) + np.kron(Y, Y) + np.kron(Z, Z))
 psi_two = np.kron(psi_one, psi_one)
 
 time_one = time_one_step(H_one, psi_one)

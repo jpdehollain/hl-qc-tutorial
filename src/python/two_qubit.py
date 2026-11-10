@@ -1,17 +1,19 @@
 import numpy as np
 
-# The Pauli matrices again, plus the 2x2 identity matrix ("do nothing")
+# The Pauli matrices again
 X = np.array([[0, 1], [1, 0]], dtype=complex)
 Y = np.array([[0, -1j], [1j, 0]], dtype=complex)
 Z = np.array([[1, 0], [0, -1]], dtype=complex)
-I = np.eye(2, dtype=complex)
 
-# Each qubit starts on the equator of its own Bloch sphere
-plus = np.array([1, 1], dtype=complex) / np.sqrt(2)
+# The starting state of each qubit
+psi_1 = np.array([1, 0], dtype=complex)
+psi_2 = np.array([0, 1], dtype=complex)
 
 # np.kron glues small vectors and matrices together into bigger ones
-psi0 = np.kron(plus, plus)            # the pair's state: 4 numbers instead of 2
-H = (np.pi / 4) * np.kron(Z, Z)       # the interaction: a 4x4 matrix instead of 2x2
+psi0 = np.kron(psi_1, psi_2)    # the pair's state: 4 numbers instead of 2
+
+# The Heisenberg exchange interaction: a 4x4 matrix instead of 2x2
+H = (np.pi / 4) * (np.kron(X, X) + np.kron(Y, Y) + np.kron(Z, Z))
 
 
 def evolution_operator(H, t):

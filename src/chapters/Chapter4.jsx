@@ -140,28 +140,30 @@ export default function Chapter4() {
         The Hamiltonian has to match, so it becomes a <X>4\times4</X> matrix. It
         can contain terms that act on each qubit separately &mdash; like the
         ones we just played with &mdash; and terms that connect the two: an{" "}
-        <strong>interaction</strong>. We'll use the simplest kind of
-        interaction, built from one <X>Z</X> matrix for each qubit:
+        <strong>interaction</strong>. We'll use a famous one, the{" "}
+        <strong>Heisenberg exchange interaction</strong>, which describes how
+        the tiny magnets (spins) of neighbouring particles push on each other
+        inside real magnets and molecules:
       </p>
 
-      <Equation tex="H = \frac{\pi}{4}\, Z \otimes Z" />
+      <Equation tex="H = \frac{\pi}{4}\left( X \otimes X + Y \otimes Y + Z \otimes Z \right)" />
 
       <p>
         The symbol <X>\otimes</X> means &ldquo;glue these together into one big
-        matrix&rdquo;, which NumPy does with <code>np.kron</code>. Remember that{" "}
-        <X>Z</X> gives +1 for a qubit in 0 and &minus;1 for a qubit in 1, so{" "}
-        <X>Z \otimes Z</X> is +1 when the two qubits agree (both 0 or both 1)
-        and &minus;1 when they disagree. That is an energy that depends on the{" "}
-        <em>relationship</em> between the two footballs, not on what either of
-        them is doing on its own &mdash; which is exactly what an interaction
-        is.
+        matrix&rdquo;, which NumPy does with <code>np.kron</code>. For example,{" "}
+        <X>X \otimes X</X> means &ldquo;apply <X>X</X> to qubit 1 and{" "}
+        <X>X</X> to qubit 2 at the same time&rdquo;. Notice that every term
+        involves both qubits and none acts on a qubit alone, which is what
+        makes this an interaction.
       </p>
 
       <p>
-        We start both qubits on the equator of their Bloch spheres, as two
-        completely independent footballs, and let the computer work out how
-        the pair evolves. Since each qubit has its own Bloch sphere, we show
-        one for each.
+        What does this interaction do to the pair? Below you can choose a
+        starting state for each qubit, so we begin with two completely
+        independent footballs, and let the computer work out how the pair
+        evolves. Each qubit gets its own Bloch sphere. Start with the defaults
+        (qubit 1 at the north pole and qubit 2 at the south pole), press Run,
+        and keep an eye on both arrows.
       </p>
 
       <Suspense fallback={<Loading />}>
@@ -169,25 +171,38 @@ export default function Chapter4() {
       </Suspense>
 
       <p>
-        Press play and watch the two arrows. At the start each qubit is
-        perfectly ordinary, with its own arrow of full length. But as the
-        interaction does its work, the arrows <em>shrink</em>. At exactly one
-        second they have vanished into the centre of their spheres, and by two
-        seconds they have grown back, pointing the opposite way.
+        Two things happen. First, the interaction{" "}
+        <strong>exchanges the two qubits</strong>: after exactly one second,
+        qubit 1 has ended up in the state that qubit 2 started in, and vice
+        versa, and after two seconds everything is back where it started. Try
+        some other combinations from the menus. If you give both qubits the
+        same starting state, nothing moves at all, because swapping two
+        identical footballs changes nothing.
       </p>
 
       <p>
-        Shrinking arrows are the signature of <strong>entanglement</strong>. At
-        one second the pair is in a perfectly well-defined state (look at the
-        four numbers in the readout), yet neither qubit has an arrow to show:
-        whichever way you measured qubit 1 by itself, you would get a coin
-        toss. The information is hidden in the connection between the two
-        qubits, in how their results line up, and an arrow can only describe a
-        qubit on its own. Once the qubits are entangled there is no pair of
-        arrows, on any number of Bloch spheres, that describes the pair. The
-        entanglement meter in the readout goes from 0 (independent qubits) to 1
-        (fully entangled), and tells the same story: the shorter the arrows,
-        the more entangled the pair.
+        Second, and more interesting, look at what happens{" "}
+        <em>half-way through the swap</em>, at half a second. With the default
+        start, both arrows have shrunk to nothing: they have vanished into the
+        centre of their spheres.
+      </p>
+
+      <p>
+        Shrinking arrows are the signature of <strong>entanglement</strong>.
+        Half-way through the swap the pair is in a perfectly well-defined state
+        (look at the four numbers in the readout), yet neither qubit has an
+        arrow to show: whichever way you measured qubit 1 by itself, you would
+        get a coin toss. What <em>is</em> certain is how the two qubits line
+        up: for the default start, if you measure one and get 0, the other is
+        guaranteed to be 1. The information is hidden in the connection between
+        the two qubits, and an arrow can only describe a qubit on its own. Once
+        the qubits are entangled there is no pair of arrows, on any number of
+        Bloch spheres, that describes the pair. The entanglement meter in the
+        readout goes from 0 (independent qubits) to 1 (fully entangled), and
+        tells the same story: the shorter the arrows, the more entangled the
+        pair. Try starting the qubits in states that are less opposite, such
+        as <X>|0\rangle</X> and <X>|+\rangle</X>, and the arrows only shrink part
+        of the way.
       </p>
 
       <p>
@@ -195,6 +210,33 @@ export default function Chapter4() {
         can draw, and where the full list of numbers &mdash; and the computer
         that handles it &mdash; becomes essential.
       </p>
+
+      <Step title="Why does this interaction swap the qubits?">
+        <p>
+          The swap operation is a <X>4\times4</X> matrix that exchanges the
+          states 01 and 10 and leaves 00 and 11 alone:
+        </p>
+        <Equation tex="\mathrm{SWAP} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}" />
+        <p>
+          It turns out (you can check by multiplying out the matrices) that{" "}
+          <Equation tex="X \otimes X + Y \otimes Y + Z \otimes Z = 2\,\mathrm{SWAP} - I" display={false} />
+          , so our Hamiltonian is just a multiple of the swap matrix plus a
+          constant. And because swapping twice puts everything back (
+          <Equation tex="\mathrm{SWAP}^2 = I" display={false} />
+          ), the exponential series simplifies exactly like it did for{" "}
+          <X>X</X> in the derivation:
+        </p>
+        <Equation tex="e^{-iHt} = e^{i\pi t/4}\left[\cos\left(\tfrac{\pi t}{2}\right) I - i\sin\left(\tfrac{\pi t}{2}\right)\mathrm{SWAP}\right]" />
+        <p>
+          At <X>t=0</X> this is the identity, so nothing has happened. At{" "}
+          <X>t=1</X> second it is a complete swap (the factor out front is just
+          a global phase, which we can't observe). In between it is a blend of
+          &ldquo;do nothing&rdquo; and &ldquo;swap&rdquo;, and at{" "}
+          <X>t=0.5</X> it is exactly half way. That is where the entanglement
+          comes from: a pair of qubits that is half-swapped is in a
+          superposition of the original state and the swapped one.
+        </p>
+      </Step>
 
       <Step title="How do you draw an arrow for a qubit that is part of a pair?">
         <p>
