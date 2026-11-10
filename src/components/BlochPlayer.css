@@ -1,0 +1,101 @@
+.bp {
+  position: relative;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem 1.1rem;
+  margin: 1.4rem 0;
+}
+
+.bp-spheres {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.5rem;
+}
+
+.bp-sphere {
+  min-width: 0;
+}
+
+.bp-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.bp-canvas {
+  width: 100%;
+  height: 300px;
+}
+
+.bp-idle {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  text-shadow: 0 0 8px var(--bg-panel), 0 0 8px var(--bg-panel);
+}
+
+.bp-controls {
+  margin-top: 0.6rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border);
+}
+
+.bp-readout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 1.2rem;
+  margin-bottom: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
+.bp-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.bp-slider-row input[type="range"] {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--accent-4);
+}
+
+.bp-play {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 50%;
+  width: 2.1rem;
+  height: 2.1rem;
+  flex-shrink: 0;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bp-play:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.bp-time {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  min-width: 4.2rem;
+  text-align: right;
+}
