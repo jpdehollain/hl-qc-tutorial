@@ -29,6 +29,7 @@ psi_one = np.array([1, 0], dtype=complex)
 H_two = (np.pi / 4) * (np.kron(X, X) + np.kron(Y, Y) + np.kron(Z, Z))
 psi_two = np.kron(psi_one, psi_one)
 
+load_run = time_one_step(H_one, psi_one)
 time_one = time_one_step(H_one, psi_one)
 time_two = time_one_step(H_two, psi_two)
 
