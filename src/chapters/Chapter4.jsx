@@ -22,7 +22,7 @@ export default function Chapter4() {
         to describe any arbitrary physical two-level system.
         If fact, in quantum computing land, we can abstract away the physical
         system and just talk about any generic two-level quantum system as a
-        quantum bit or <em>qubit</em>.
+        quantum bit or <strong>qubit</strong>.
       </p>
 
       <p>
@@ -37,9 +37,9 @@ export default function Chapter4() {
       <Step title="What are the physical systems of bits and qubits?">
         <p>
           In classical computing, the physical systems that implement bits are
-          usually transistors, tiny electronic switches in which the 0 or 1
-          value of the bit corresponds to the absence or presence of an
-          electrical current flowing through them.
+          usually <strong>transistors</strong>, tiny electronic switches in
+          which the 0 or 1 value of the bit corresponds to the absence or 
+          presence of an electrical current flowing through them.
         </p>
         <p>
           In quantum computing, there are currently several physical systems
@@ -54,7 +54,7 @@ export default function Chapter4() {
       </Step>
 
       <p>
-        We have seen used our analytical maths skills to show how a single
+        We have used our analytical maths skills to show how a single
         qubit behaves. 
         In the rest of this chapter we will learn how to program a computer
         to numerically reach the same result and then use the same approach
@@ -64,33 +64,32 @@ export default function Chapter4() {
       <h3>Programming Quantum Systems</h3>
 
       <p>
-        Let's translate the steps of our hand derivation into Python, the
-        programming language behind most scientific and quantum computing code.
-        The program below has the same ingredients as the maths: a Hamiltonian{" "}
-        <X>H</X> and a starting state, which are just arrays of numbers (a
-        matrix and a vector) handled by a library called NumPy; and a function
-        that builds the time-evolution operator{" "}
-        <Equation tex="e^{-iHt}" display={false} /> by following the same
-        recipe as before &mdash; find the eigenvalues and eigenvectors,
-        exponentiate the diagonal part, and multiply everything back together.
-        The last line multiplies the operator by the starting state to find the
-        state at 101 different moments in time.
+        Let's write some code that will make the computer solve the time
+        evolution problem that we tackled in the previous chapter.
+        We will use a coding language called <strong>Python</strong>, which
+        is the language of choice for many scientific and quantum computing code.
+        Have a look at the code below and try to identify the ingredients and
+        equations of our quantum system.
+        I have added comments on the lines that start with a <code>#</code> to
+        help you understand the code.
+        If you have never seen code and this is hard to follow don't worry,
+        all you need to know is that these lines of codes are telling the
+        computer to apply the required mathematical operations to solve the
+        time evolution of our quantum system.
       </p>
 
       <p>
-        Best of all, you can run this code right here. Python is running inside
-        your browser &mdash; no servers involved &mdash; thanks to a project
-        called Pyodide. The first time you press <strong>Run</strong> it needs
-        to download Python itself (a one-off download of a few megabytes), after
-        that it is instant.
-      </p>
-
-      <p>
-        I've added menus to pick the Hamiltonian and the starting state. Choose
-        one and watch how the arrow moves on the Bloch sphere (the animation
-        plays in real time, so one second on the clock is one second of quantum
-        evolution). Then try editing the code yourself. What happens if you
-        change the <X>\pi/2</X> in front of the Hamiltonian?
+        Best of all, you can run this code right here. Just press the Run button
+        and the browser will run the Python code and plot the results on the Bloch
+        sphere below.
+        To make it more fun, I have added some additional Hamiltonians and
+        starting states for you to play with.
+        Just pick them from the dropdown menus and watch how it changes the
+        arrow moves around the Bloch sphere.
+        Can you find where the code gets changed when you pick a different
+        Hamiltonian or starting state?
+        Lastly, if you are familiar with the code, you can also edit it directly and
+        press run.
       </p>
 
       <Suspense fallback={<Loading />}>
@@ -111,27 +110,18 @@ export default function Chapter4() {
         </p>
       </Step>
 
-      <Step title="What is P.conj().T doing in the code?">
-        <p>
-          In our hand derivation the matrix <X>P</X> turned out to be its own
-          inverse, but that was a lucky coincidence of that particular matrix.
-          For matrices that work as Hamiltonians, the inverse of <X>P</X> is
-          always its <em>conjugate transpose</em>: flip the matrix over its
-          diagonal and flip the sign of every imaginary part. In NumPy that is
-          written <code>P.conj().T</code>, and it is much cheaper for the
-          computer than working out an inverse from scratch. And{" "}
-          <code>np.linalg.eigh</code> is NumPy's ready-made tool for finding the
-          eigenvalues and eigenvectors of this kind of matrix.
-        </p>
-      </Step>
-
       <h3>Adding a second qubit</h3>
 
       <p>
-        Time to add a second quantum football. Each qubit can be seen as 0 or 1,
-        so a pair can come out as 00, 01, 10 or 11 &mdash; four possibilities.
-        The state needs one number for each of them, so the state of the pair
-        is a vector with four numbers instead of two:
+        With classical bits, combining two bits gives four possibilities:
+        00, 01, 10 and 11.
+        In quantum land, we can also combine two qubits to create a system that
+        has four possible measurement outcomes.
+        In our quantum football analogy, this is equivalent to now being able
+        to see the ball in any of the four corners of the goal.
+        What does this mean for our quantum state?
+        Well if one qubit needs a two-number vector to describe it, then for a
+        two-qubit state we need a four-number vector:
       </p>
 
       <Equation tex="|\psi\rangle = \begin{pmatrix} c_{00} \\ c_{01} \\ c_{10} \\ c_{11} \end{pmatrix}" />
