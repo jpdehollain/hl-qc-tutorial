@@ -1,23 +1,18 @@
 import time
 import numpy as np
+from scipy.linalg import expm
 
 X = np.array([[0, 1], [1, 0]], dtype=complex)
 Y = np.array([[0, -1j], [1j, 0]], dtype=complex)
 Z = np.array([[1, 0], [0, -1]], dtype=complex)
 
 
-def evolution_operator(H, t):
-    energies, P = np.linalg.eigh(H)
-    D = np.diag(np.exp(-1j * energies * t))
-    return P @ D @ P.conj().T
-
-
 def time_one_step(H, psi0, dt=0.01, repeats=2000):
     """Average time, in seconds, to take one step of the time evolution."""
-    evolution_operator(H, dt) @ psi0          # warm-up run, not timed
+    expm(-1j * H * dt) @ psi0          # warm-up run, not timed
     start = time.perf_counter()
     for _ in range(repeats):
-        psi = evolution_operator(H, dt) @ psi0
+        psi = expm(-1j * H * dt) @ psi0
     return (time.perf_counter() - start) / repeats
 
 

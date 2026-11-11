@@ -1,27 +1,28 @@
 import numpy as np
+from scipy.linalg import expm
 
-# The Pauli matrices again
+# Define the same matrices as before, but now we will use them to define a Hamiltonian for two qubits.
+
 X = np.array([[0, 1], [1, 0]], dtype=complex)
 Y = np.array([[0, -1j], [1j, 0]], dtype=complex)
 Z = np.array([[1, 0], [0, -1]], dtype=complex)
 
-# The starting state of each qubit
+# We need two starting states, one for each qubit
+
 psi_1 = np.array([1, 0], dtype=complex)
 psi_2 = np.array([0, 1], dtype=complex)
 
 # np.kron glues small vectors and matrices together into bigger ones
-psi0 = np.kron(psi_1, psi_2)    # the pair's state: 4 numbers instead of 2
+# so the starting state will become a 4-number vector instead of a 2-number vector
 
-# The Heisenberg exchange interaction: a 4x4 matrix instead of 2x2
+psi0 = np.kron(psi_1, psi_2)
+
+# Now we create a Hamiltonian for two qubits. It will be a 4x4 matrix instead of a 2x2 matrix.
+# This particular expression creates the Heisenberg Hamiltonian explained in the text.
+
 H = (np.pi / 4) * (np.kron(X, X) + np.kron(Y, Y) + np.kron(Z, Z))
 
-
-def evolution_operator(H, t):
-    """Exactly the same function as for one qubit, it doesn't care about the size."""
-    energies, P = np.linalg.eigh(H)
-    D = np.diag(np.exp(-1j * energies * t))
-    return P @ D @ P.conj().T
-
+# Finally, we run the time-evolution simulation just like in the single-qubit case.
 
 times = np.linspace(0, 2, 101)
-states = [evolution_operator(H, t) @ psi0 for t in times]
+states = [expm(-1j * H * t) @ psi0 for t in times]

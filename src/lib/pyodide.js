@@ -43,6 +43,7 @@ export function loadPython() {
       await loadScript(`${INDEX_URL}pyodide.js`);
       const py = await window.loadPyodide({ indexURL: INDEX_URL });
       await py.loadPackage("numpy");
+      await py.loadPackage("scipy");
       setPhase("ready");
       return py;
     })().catch((err) => {
