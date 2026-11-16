@@ -100,12 +100,13 @@ export default function Chapter4() {
         <p>
           <X>X</X>, <X>Y</X> and <X>Z</X> are known as the{" "}
           <strong>Pauli matrices</strong>: the simplest <X>2\times2</X>{" "}
-          matrices that can act as a qubit Hamiltonian. Each one makes the Bloch
-          arrow spin around the axis with the same name &mdash; <X>X</X> around
-          the x axis, <X>Y</X> around the y axis, and <X>Z</X> around the
-          vertical axis through the poles. Any single-qubit Hamiltonian is a
-          combination of these three (plus a constant, which has no observable
-          effect). The last option in the menu adds <X>X</X> and <X>Z</X>{" "}
+          matrices that can act as a qubit Hamiltonian. 
+          Each one makes the Bloch arrow spin around the axis with the same 
+          name &mdash; <X>X</X> around the x axis, <X>Y</X> around the y axis, 
+          and <X>Z</X> around the vertical axis through the poles. 
+          Every possible Hamiltonian can be broken down into a linear 
+          combination of the Pauli matrices.
+          The last option in the menu adds <X>X</X> and <X>Z</X>{" "}
           together, which spins the arrow around an axis halfway between them.
         </p>
       </Step>
@@ -119,41 +120,75 @@ export default function Chapter4() {
         has four possible measurement outcomes.
         In our quantum football analogy, this is equivalent to now being able
         to see the ball in any of the four corners of the goal.
-        What does this mean for our quantum state?
+      </p>
+
+      <p>
+        Two qubits can be separate entities and can be measured separately, but
+        to describe what happens when they interact with each other, we need to
+        consider them as a single quantum system with a single state that
+        describes the two qubits together.
+        What do the state and Hamiltonian look like?
         Well if one qubit needs a two-number vector to describe it, then for a
-        two-qubit state we need a four-number vector:
+        two-qubit state we need a four-number vector and a correponding{" "}
+        <X>4\times4</X> Hamiltonian matrix:
       </p>
 
-      <Equation tex="|\psi\rangle = \begin{pmatrix} c_{00} \\ c_{01} \\ c_{10} \\ c_{11} \end{pmatrix}" />
+      <Equation tex="|\psi\rangle = \begin{pmatrix} c_{00} \\ c_{01} \\ c_{10} \\ c_{11} \end{pmatrix}, \;\; H = \begin{pmatrix} h_{00} & h_{01} & h_{02} & h_{03} \\ h_{10} & h_{11} & h_{12} & h_{13} \\ h_{20} & h_{21} & h_{22} & h_{23} \\ h_{30} & h_{31} & h_{32} & h_{33} \end{pmatrix}" />
 
       <p>
-        The Hamiltonian has to match, so it becomes a <X>4\times4</X> matrix. It
-        can contain terms that act on each qubit separately &mdash; like the
-        ones we just played with &mdash; and terms that connect the two: an{" "}
-        <strong>interaction</strong>. We'll use a famous one, the{" "}
-        <strong>Heisenberg exchange interaction</strong>, which describes how
-        the tiny magnets (spins) of neighbouring particles push on each other
-        inside real magnets and molecules:
+        For our concrete example, let's assume that for our initial state,
+        qubit 1 is in the <X>|0\rangle</X> state and qubit 2 is in the{" "}
+        <X>|1\rangle</X> state.
       </p>
 
-      <Equation tex="H = \frac{\pi}{4}\left( X \otimes X + Y \otimes Y + Z \otimes Z \right)" />
+      <Step title="Can you guess what the vector looks like?">
+        <p>
+          The answer is:
+        </p>
+        
+        <Equation tex="|\psi\rangle = \begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \end{pmatrix}" />
+        
+        <p>
+          Notice that the position of the 1 in the vector corresponds to{" "}
+          <Equation tex="c_{01}" display={false} /> above, meaning that there is 100% probability 
+          the two qubits combined are in 01.
+        </p>
+        
+        <p>
+          Linear algebra gives us a clever way to construct two-qubit states from separate
+          single-qubit states, through a operation called the <strong>tensor product</strong>,
+          which is denoted by the symbol <X>\otimes</X>:
+        </p>
+        
+        <Equation tex="|\psi\rangle = |0\rangle \otimes |1\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix} \otimes \begin{pmatrix} 0 \\ 1 \end{pmatrix} = \begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \end{pmatrix}" />
+
+        <p>
+          As you'll see below, we can also use this to construct two-qubit Hamiltonians.
+        </p>
+      </Step>
+      
+      <p>
+        For our example two-qubit simulation, we will use a Hamiltonian that
+        describes an interaction known as <strong>exchange</strong>.
+        See if you can guess why it has that name after you run the simulation and see
+        its effect on the Bloch spheres.
+        The Hamiltonian can be constructed from the Pauli matrices in the following way:
+      </p>
+
+      <Equation tex="\begin{aligned} H = \frac{\pi}{4}\left( X \otimes X + Y \otimes Y + Z \otimes Z \right) = \frac{\pi}{4}\begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & -1 & 2 & 0 \\ 0 & 2 & -1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix} \end{aligned}" />
 
       <p>
-        The symbol <X>\otimes</X> means &ldquo;glue these together into one big
-        matrix&rdquo;, which NumPy does with <code>np.kron</code>. For example,{" "}
-        <X>X \otimes X</X> means &ldquo;apply <X>X</X> to qubit 1 and{" "}
-        <X>X</X> to qubit 2 at the same time&rdquo;. Notice that every term
-        involves both qubits and none acts on a qubit alone, which is what
-        makes this an interaction.
+        Ok, lets write the code and run this simulation!
+        In Python, we can use the <code>np.kron</code> function to calculate
+        the tensor product of two matrices.
+        All the other steps should be familiar from the previous simulation you wrote 😜
       </p>
 
       <p>
-        What does this interaction do to the pair? Below you can choose a
-        starting state for each qubit, so we begin with two completely
-        independent footballs, and let the computer work out how the pair
-        evolves. Each qubit gets its own Bloch sphere. Start with the defaults
-        (qubit 1 at the north pole and qubit 2 at the south pole), press Run,
-        and keep an eye on both arrows.
+        For this one, I only gave you menus to play with the starting state
+        for each qubit.
+        If you want to try a different Hamiltonian, you can edit the code 
+        directly and press run.
       </p>
 
       <Suspense fallback={<Loading />}>
@@ -161,83 +196,56 @@ export default function Chapter4() {
       </Suspense>
 
       <p>
-        Two things happen. First, the interaction{" "}
-        <strong>exchanges the two qubits</strong>: after exactly one second,
-        qubit 1 has ended up in the state that qubit 2 started in, and vice
-        versa, and after two seconds everything is back where it started. Try
-        some other combinations from the menus. If you give both qubits the
-        same starting state, nothing moves at all, because swapping two
-        identical footballs changes nothing.
+        Play around with the initial states and see if you can figure out why
+        we call this the exchange interaction.
+        Then open the box below to read the answer.
       </p>
 
-      <p>
-        Second, and more interesting, look at what happens{" "}
-        <em>half-way through the swap</em>, at half a second. With the default
-        start, both arrows have shrunk to nothing: they have vanished into the
-        centre of their spheres.
-      </p>
-
-      <p>
-        Shrinking arrows are the signature of <strong>entanglement</strong>.
-        Half-way through the swap the pair is in a perfectly well-defined state
-        (look at the four numbers in the readout), yet neither qubit has an
-        arrow to show: whichever way you measured qubit 1 by itself, you would
-        get a coin toss. What <em>is</em> certain is how the two qubits line
-        up: for the default start, if you measure one and get 0, the other is
-        guaranteed to be 1. The information is hidden in the connection between
-        the two qubits, and an arrow can only describe a qubit on its own. Once
-        the qubits are entangled there is no pair of arrows, on any number of
-        Bloch spheres, that describes the pair. The entanglement meter in the
-        readout goes from 0 (independent qubits) to 1 (fully entangled), and
-        tells the same story: the shorter the arrows, the more entangled the
-        pair. Try starting the qubits in states that are less opposite, such
-        as <X>|0\rangle</X> and <X>|+\rangle</X>, and the arrows only shrink part
-        of the way.
-      </p>
-
-      <p>
-        This is the point where quantum systems stop fitting into pictures we
-        can draw, and where the full list of numbers &mdash; and the computer
-        that handles it &mdash; becomes essential.
-      </p>
-
-      <Step title="Why does this interaction swap the qubits?">
+      <Step title="Hint: What happens after exactly one second?">
         <p>
-          The swap operation is a <X>4\times4</X> matrix that exchanges the
-          states 01 and 10 and leaves 00 and 11 alone:
-        </p>
-        <Equation tex="\mathrm{SWAP} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}" />
-        <p>
-          It turns out (you can check by multiplying out the matrices) that{" "}
-          <Equation tex="X \otimes X + Y \otimes Y + Z \otimes Z = 2\,\mathrm{SWAP} - I" display={false} />
-          , so our Hamiltonian is just a multiple of the swap matrix plus a
-          constant. And because swapping twice puts everything back (
-          <Equation tex="\mathrm{SWAP}^2 = I" display={false} />
-          ), the exponential series simplifies exactly like it did for{" "}
-          <X>X</X> in the derivation:
-        </p>
-        <Equation tex="e^{-iHt} = e^{i\pi t/4}\left[\cos\left(\tfrac{\pi t}{2}\right) I - i\sin\left(\tfrac{\pi t}{2}\right)\mathrm{SWAP}\right]" />
-        <p>
-          At <X>t=0</X> this is the identity, so nothing has happened. At{" "}
-          <X>t=1</X> second it is a complete swap (the factor out front is just
-          a global phase, which we can't observe). In between it is a blend of
-          &ldquo;do nothing&rdquo; and &ldquo;swap&rdquo;, and at{" "}
-          <X>t=0.5</X> it is exactly half way. That is where the entanglement
-          comes from: a pair of qubits that is half-swapped is in a
-          superposition of the original state and the swapped one.
+          The two qubits undergo an evolution that swaps
+          &mdash;or exchanges&mdash;their states back and forth.
+          At the one second mark, the two qubits have perfectly swapped their
+          initial states.
+          In quantum computing lingo, this is called a{" "}
+          <strong>SWAP gate</strong>, for obvious reasons.
         </p>
       </Step>
 
-      <Step title="How do you draw an arrow for a qubit that is part of a pair?">
-        <p>
-          To draw the arrow for qubit 1, we ask what we would see if we only
-          ever looked at qubit 1 and ignored qubit 2 completely (the maths for
-          this is called a <em>partial trace</em>). A qubit that isn't entangled
-          gets an arrow of length one, an entangled qubit gets a shorter one.
-          This is done by a small helper that runs after your code, which you
-          can find in <code>src/python/collect_two.py</code>.
-        </p>
-      </Step>
+      <p>
+        Next, let's look at what happens <em>half-way through the swap</em>,
+        at half a second.
+        With the default start, both arrows have shrunk to nothing: they have vanished into the
+        centre of their spheres!
+      </p>
+
+      <p>
+        There are two reasons why we might see arrows "shrink" in the Bloch sphere.
+        The first is related to the qubit losing information to its environment,
+        something that quantum computing engineers work really hard to avoid,
+        because it makes the quantum computers perform badly.
+        But in this case, we are simulating perfect qubits, so no information
+        has been lost.
+        The qubits have gone into a state&mdash;described by a phenomenom
+        called <strong>entanglement</strong>&mdash;where they can no longer be
+        described independently.
+        They cannot be drawn in separate Bloch spheres but would need to be drawn
+        in a single one, but we would need 5 dimensions to draw it.
+        It some sense, the shrinking arrows are dissapearing into another
+        dimension! 🫠 
+      </p>
+
+      <p>
+        You might have noticed that both of these simulations run almost
+        almost instantly in your browser.
+        As soon as you click run, the arrows in the Bloch spheres start to
+        spin.
+        As the matrices that we need to exponentiate become larger and larger,
+        our computer will very quickly (and noticeably) begin to struggle.
+        We will see this in action and discuss it in the next chapter, but I
+        will end this one showing you the framework we will use to measure how
+        hard the computer is working to solve our quantum simulations.
+      </p>
 
       <h3>How much work was that?</h3>
 
@@ -245,11 +253,12 @@ export default function Chapter4() {
         Look at what the computer had to handle when we went from one qubit to
         two: the state grew from 2 numbers to 4, and the Hamiltonian from a{" "}
         <X>2\times2</X> matrix (4 numbers) to a <X>4\times4</X> matrix (16
-        numbers). Let's find out how long the computer takes to do one step of
-        the time evolution in each case &mdash; building the time-evolution
-        operator and multiplying it by the state. A single step is far too fast
-        to time on its own, so the code repeats it 2000 times and works out the
-        average.
+        numbers). 
+        Let's add some lines to our code that shows us how long the computer
+        takes to do one step of the time evolution in each case &mdash; building
+        the time-evolution operator and multiplying it by the state. 
+        A single step is far too fast to time on its own, so the code repeats it
+        2000 times and works out the average.
       </p>
 
       <Suspense fallback={<Loading />}>
@@ -263,8 +272,8 @@ export default function Chapter4() {
         numbers depend on your device and browser). But hold on to what happened
         to the matrix: adding one qubit made it four times bigger. In general,
         every extra qubit doubles the length of the state and quadruples the
-        size of the matrix. In the next chapter we'll keep adding qubits and
-        see what happens to that timing.
+        size of the matrix. Now we're ready to add more qubits and see what
+        happens to that timing.
       </p>
     </article>
   );
