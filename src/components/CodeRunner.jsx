@@ -1,23 +1,38 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePreloadWhenVisible } from "../lib/usePython";
 import "./CodeRunner.css";
+
+// Counts the seconds since it appeared on screen.
+function Elapsed() {
+  const [seconds, setSeconds] = useState(0);
+  useEffect(() => {
+    const start = performance.now();
+    const id = setInterval(() => setSeconds(Math.floor((performance.now() - start) / 1000)), 500);
+    return () => clearInterval(id);
+  }, []);
+  return <>{seconds} s</>;
+}
 
 /**
  * An editable Python code box with a Run button and an output area.
  * It does not run anything itself: the parent passes the state from useCodeRun().
+ * Pass `onStop` to show a Stop button while the code is running, and `preload`
+ * (a function that starts loading Python) if the demo doesn't use the default runtime.
  */
-export default function CodeRunner({ code, onChange, onRun, onReset, status, pythonPhase, stdout, error }) {
+export default function CodeRunner({ code, onChange, onRun, onReset, onStop, preload, status, pythonPhase, stdout, error }) {
   const rootRef = useRef(null);
-  usePreloadWhenVisible(rootRef);
+  usePreloadWhenVisible(rootRef, preload);
 
   const running = status === "running";
   const downloading = running && pythonPhase === "loading";
 
   let output = null;
   if (downloading) {
-    output = { text: "Downloading Python (first run only, a few seconds)\u2026", kind: "note" };
+    output = { text: <>Downloading Python (first run only, a few seconds)&hellip; <Elapsed /></>, kind: "note" };
   } else if (running) {
-    output = { text: "Running\u2026", kind: "note" };
+    output = { text: <>Running&hellip; <Elapsed /></>, kind: "note" };
+  } else if (status === "stopped") {
+    output = { text: "Stopped. Python restarts the next time you press Run (a few seconds).", kind: "note" };
   } else if (error) {
     output = { text: [stdout, error].filter(Boolean).join("\n"), kind: "error" };
   } else if (stdout) {
@@ -37,9 +52,15 @@ export default function CodeRunner({ code, onChange, onRun, onReset, status, pyt
               Reset
             </button>
           )}
-          <button className="cr-button cr-run" onClick={onRun} disabled={running}>
-            {running ? "Running\u2026" : "\u25b6 Run"}
-          </button>
+          {running && onStop ? (
+            <button className="cr-button cr-run" onClick={onStop}>
+              {"\u25a0 Stop"}
+            </button>
+          ) : (
+            <button className="cr-button cr-run" onClick={onRun} disabled={running}>
+              {running ? "Running\u2026" : "\u25b6 Run"}
+            </button>
+          )}
         </div>
       </div>
       <textarea

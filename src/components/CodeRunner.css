@@ -18,7 +18,7 @@
 .cr-lang {
   font-family: var(--font-mono);
   font-size: 0.8rem;
-  color: var(--accent-4);
+  color: var(--demo-accent, var(--accent-4));
 }
 
 .cr-hint {
@@ -48,8 +48,8 @@
 }
 
 .cr-run {
-  background: var(--accent-4);
-  border-color: var(--accent-4);
+  background: var(--demo-accent, var(--accent-4));
+  border-color: var(--demo-accent, var(--accent-4));
   color: #120f1f;
   font-weight: 500;
 }

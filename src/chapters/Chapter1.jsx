@@ -3,7 +3,7 @@ import Equation, { X } from "../components/Equation";
 export default function Chapter1() {
   return (
     <article>
-      <h1>Physics in the quantum world</h1>
+      <h1>Predicting the world around us</h1>
 
       <p>
         If you have read news articles about quantum computers but don't really

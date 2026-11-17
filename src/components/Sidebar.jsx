@@ -1,20 +1,19 @@
 import "./Sidebar.css";
 
 const CHAPTERS = [
-  { id: 1, title: "Physics in the quantum world", accent: "var(--accent-1)" },
+  { id: 1, title: "Predicting the world around us", accent: "var(--accent-1)" },
   { id: 2, title: "Quantum footballs", accent: "var(--accent-2)" },
   { id: 3, title: "From football to Bloch sphere", accent: "var(--accent-3)" },
   { id: 4, title: "Qubits and simulations", accent: "var(--accent-4)" },
   { id: 5, title: "Scaling up", accent: "var(--accent-5)" },
-  { id: 6, title: "Where this goes", accent: "var(--accent-6)" },
 ];
 
 export default function Sidebar({ current, onSelect }) {
   return (
     <nav className="sidebar" aria-label="Chapters">
       <div className="sidebar-mark">
-        <span className="sidebar-mark-dot" aria-hidden="true" />
-        Why we want quantum computers
+        <img src="icons/icon-192.png" width="50" />
+        Computing the quantum world:<br />a tutorial
       </div>
 
       <ol className="ladder">

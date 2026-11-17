@@ -1,0 +1,35 @@
+.scaling .demo-controls {
+  align-items: flex-end;
+}
+
+.demo-button {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.demo-button:hover:not(:disabled) {
+  border-color: var(--demo-accent, var(--accent-4));
+}
+
+.demo-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.demo-button-quiet {
+  background: none;
+  color: var(--text-dim);
+}
+
+.scaling-progress {
+  margin: -0.4rem 0 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}

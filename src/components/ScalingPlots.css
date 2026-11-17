@@ -1,0 +1,148 @@
+.sp-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin: 1.2rem 0 0.6rem;
+}
+
+.sp-grid {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.sp-axis {
+  stroke: var(--text-faint);
+  stroke-width: 1.2;
+}
+
+.sp-tick {
+  fill: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.sp-title {
+  fill: var(--text-dim);
+  font-family: var(--font-body);
+  font-size: 13px;
+}
+
+.sp-note {
+  fill: var(--text-dim);
+  font-family: var(--font-body);
+  font-size: 13px;
+}
+
+.sp-note-strong {
+  fill: var(--text);
+  font-weight: 500;
+}
+
+.sp-band {
+  fill: var(--text-faint);
+  opacity: 0.12;
+}
+
+.sp-point {
+  fill: var(--accent-5);
+  stroke: var(--bg-panel);
+  stroke-width: 2;
+}
+
+.sp-point-faded {
+  opacity: 0.35;
+}
+
+.sp-line {
+  fill: none;
+  stroke: var(--accent-5);
+  stroke-width: 1.5;
+  opacity: 0.6;
+}
+
+.sp-fit {
+  stroke: var(--accent-5);
+  stroke-width: 2;
+  stroke-dasharray: 7 6;
+}
+
+.sp-fit-solid {
+  stroke: var(--accent-5);
+  stroke-width: 2;
+}
+
+.sp-beyond {
+  fill: var(--accent-6);
+  opacity: 0.1;
+}
+
+.sp-ref {
+  stroke: var(--text-faint);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+}
+
+.sp-ref-universe {
+  stroke: var(--accent-6);
+  stroke-width: 1.5;
+}
+
+.sp-reflabel {
+  fill: var(--text-dim);
+  font-family: var(--font-body);
+  font-size: 12px;
+}
+
+.sp-drop {
+  stroke: var(--text-faint);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}
+
+.sp-cross {
+  fill: var(--bg-panel);
+  stroke: var(--text);
+  stroke-width: 2;
+}
+
+.sp-crosslabel {
+  fill: var(--text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.sp-caption {
+  font-size: 0.92rem;
+  color: var(--text-dim);
+}
+
+.sp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  margin: 0.4rem 0 1.4rem;
+}
+
+.sp-table th,
+.sp-table td {
+  text-align: right;
+  padding: 0.35rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sp-table th:first-child,
+.sp-table td:first-child {
+  text-align: left;
+}
+
+.sp-table th {
+  font-weight: 500;
+  color: var(--text-dim);
+}
+
+.sp-table td {
+  font-family: var(--font-mono);
+}

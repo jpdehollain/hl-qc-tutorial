@@ -8,15 +8,18 @@ export function usePythonPhase() {
   return phase;
 }
 
-/** Start downloading Python once the element in `ref` is near the screen. */
-export function usePreloadWhenVisible(ref) {
+/**
+ * Start downloading Python once the element in `ref` is near the screen.
+ * Pass `load` to preload a different Python runtime than the default one.
+ */
+export function usePreloadWhenVisible(ref, load = loadPython) {
   useEffect(() => {
     const el = ref.current;
     if (!el || typeof IntersectionObserver === "undefined") return;
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) {
-          loadPython().catch(() => {}); // errors are shown when the user presses Run
+          load().catch(() => {}); // errors are shown when the user presses Run
           observer.disconnect();
         }
       },
@@ -24,7 +27,7 @@ export function usePreloadWhenVisible(ref) {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [ref]);
+  }, [ref, load]);
 }
 
 /**
