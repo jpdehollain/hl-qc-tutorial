@@ -68,7 +68,8 @@
   line-height: 1.55;
   padding: 0.9rem 1rem;
   white-space: pre;
-  overflow-x: auto;
+  overflow: auto;
+  max-height: calc(20 * 1.55em + 1.8rem); /* about 20 lines, then it scrolls */
   tab-size: 4;
 }
 

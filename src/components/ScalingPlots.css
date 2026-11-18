@@ -146,3 +146,9 @@
 .sp-table td {
   font-family: var(--font-mono);
 }
+
+.sp-valuelabel {
+  fill: var(--text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}

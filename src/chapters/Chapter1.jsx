@@ -9,7 +9,7 @@ export default function Chapter1() {
         If you have read news articles about quantum computers but don't really
         get what makes them different from ordinary computers, this tutorial is
         here to help. 
-        It is aimed at people who are not necessarily proficient in quantum 
+        It is not aimed at people who are proficient in quantum 
         mechanics, but who are willing to do (or at least look at) some hands 
         on maths and simple programming to understand what makes quantum 
         computers powerful.

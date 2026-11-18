@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Sidebar from "./components/Sidebar";
 import Chapter1 from "./chapters/Chapter1";
 import Chapter2 from "./chapters/Chapter2";
@@ -18,11 +18,19 @@ const CHAPTER_COMPONENTS = {
 export default function App() {
   const [current, setCurrent] = useState(1);
   const ChapterView = CHAPTER_COMPONENTS[current];
+  const contentRef = useRef(null);
+
+  // Start every chapter at the top. On wide screens the content pane scrolls
+  // by itself, on narrow screens the whole page does, so reset both.
+  useEffect(() => {
+    if (contentRef.current) contentRef.current.scrollTop = 0;
+    window.scrollTo(0, 0);
+  }, [current]);
 
   return (
     <div className="app-shell">
       <Sidebar current={current} onSelect={setCurrent} />
-      <main className="content">
+      <main className="content" ref={contentRef}>
         <div className="content-inner">
           <ChapterView />
           <div className="chapter-nav">

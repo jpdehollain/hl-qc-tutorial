@@ -8,7 +8,7 @@ Y = np.array([[0, -1j], [1j, 0]], dtype=complex)
 Z = np.array([[1, 0], [0, -1]], dtype=complex)
 
 # How many qubits do we want to simulate?
-n_qubits = 6
+n_qubits = 3
 
 
 def heisenberg_chain(n):

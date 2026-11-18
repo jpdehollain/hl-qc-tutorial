@@ -6,6 +6,7 @@ import "../components/ScalingPlots.css";
 // The demos talk to Python and draw the plots, so only load them when
 // someone actually reaches this chapter.
 const ScalingDemo = lazy(() => import("../components/ScalingDemo"));
+const ScalingLog = lazy(() => import("../components/ScalingLog"));
 const ExtrapolationChart = lazy(() => import("../components/ExtrapolationChart"));
 
 const Loading = () => <div className="bloch-loading">Loading&hellip;</div>;
@@ -13,42 +14,50 @@ const Loading = () => <div className="bloch-loading">Loading&hellip;</div>;
 export default function Chapter5() {
   return (
     <article>
-      <h1>Scaling up</h1>
+      <h1>How much harder can it get?</h1>
 
       <p>
-        In the last chapter our program handled one qubit and two qubits without
-        breaking a sweat. Now let's keep adding qubits and see what happens. To
-        do that we need a Hamiltonian that we can grow one qubit at a time, so
-        we'll line the qubits up in a chain and let every qubit interact with
-        its neighbours using the same Heisenberg exchange interaction as in
-        the last chapter:
+        You now know how to write a time-evolution simulation for a single
+        qubit, and how to expand it to two qubits.
+        Let's keep expanding and see what happens!
+        Expanding the quantum state is straight forward&mdash;just keep
+        joining more qubits with tensor product.
+        For the Hamiltonian, there are a few different ways to expand the
+        exchange Hamiltonian.
+        I have chosen to model a linear array with nearest neighbour
+        interactions.
+        For those who are curious, this is what it looks like:
       </p>
 
       <Equation tex="H = \frac{\pi}{4}\sum_{i=1}^{n-1}\left( X_i X_{i+1} + Y_i Y_{i+1} + Z_i Z_{i+1} \right)" />
 
       <p>
-        Here <X>X_i</X> means &ldquo;apply <X>X</X> to qubit <X>i</X> and do
-        nothing to all the others&rdquo;, so every term in the sum is the
-        exchange interaction between one pair of neighbours. For{" "}
-        <X>n=2</X> there is only one pair, and this is exactly the Hamiltonian
-        we used before. Chains and lattices like this are how physicists model
-        real magnets, so it's also a system we genuinely want to simulate. We
-        start with the qubits alternating 0, 1, 0, 1&hellip; (for two qubits
-        that is the state we started with last time).
+        Chains and lattices like this are how physicists model
+        real magnets, so it's also a system that is genuinely interesting
+        to simulate.
       </p>
 
-      <h3>How long does one step take?</h3>
+      <p>
+        Next we have a script that lets you choose a number of qubits to
+        simulate. You can choose either by using the dropdown box or entering
+        a number next to <code>n_qubits = </code> in the code.
+        After running it will print below how long one step of the simulation
+        took on average, just like the last script that we ran in the previous chapter.
+        Below the script is a plot of simulation time vs number of qubits,
+        which is initiall empty.
+        Every time you run a simulation the plot will add a point for that
+        number of qubits.
+        The idea is for you to get a sense of how quickly the simulation
+        time blows up as you increase the number of qubits.{" "}
+        <strong>Beware</strong> that beyond 10 qubits, you might be waiting
+        a long time for it to finish, so I would advise against that!
+        You can always just press <code>Stop</code> if it's taking too long.
+      </p>
 
       <p>
-        Choose a number of qubits below and press <strong>Run</strong>. Python
-        builds the Hamiltonian for that many qubits and times one step of the
-        time evolution, in exactly the same way as before: build{" "}
-        <Equation tex="e^{-iHt}" display={false} /> and multiply it by the
-        state. Every result is added to the plot underneath the code. If you
-        don't feel like clicking through every size, press &ldquo;Run 2 to 9 for
-        me&rdquo;. The 10 qubit run is the slow one: on my computer it takes
-        well under a minute, but on yours it may take longer, and the Stop
-        button is there if you lose patience.
+        Finally, if you don't want to run the simulations one by one, you can
+        press <code>Run 2 to 9 for me</code> and just watch the plot get filled;
+        and if you want to clear the plot and start over you can press <code>Clear results</code>.
       </p>
 
       <Suspense fallback={<Loading />}>
@@ -56,28 +65,56 @@ export default function Chapter5() {
       </Suspense>
 
       <p>
-        Two things stand out in the plot. First, up to about 5 qubits the time
-        barely changes: a step is so quick that what we are really measuring
-        is the computer's housekeeping, which is why that part is shaded.
-        Second, from 6 qubits onwards the points fall on a straight line. The
-        vertical axis is logarithmic, so every gridline is 10 times the one
-        below it, and a straight line on a plot like this means that{" "}
-        <em>every extra qubit multiplies the time by the same factor</em>. That
-        is exponential growth, and the factor is written on the plot. If
-        you've run 10 qubits, the matrix that we exponentiate has more than a
-        million numbers in it, and one step takes tens of seconds. The table
-        shows the other thing that is growing, the memory needed just to store
-        the matrix.
+        Watch what happens to the plot as you run simulations and points get
+        added. 
+        Up to about 5 qubits time increases slowly, since the simulation time
+        is dominated by the computer's housekeeping&mdash;also known as <em>overhead</em>. 
+        Add more qubits and the curve takes off. 
+        Every time you run a bigger system the vertical axis has to stretch to
+        fit the new point, and all the results before it get squashed towards zero.
+        That is what exponential growth looks like:{" "}
+        <em>every extra qubit multiplies the time by a large factor</em>, so the
+        latest step always dwarfs everything before it. 
+        The table below the plot shows another thing that is growing exponentially: 
+        the computer memory needed just to store the matrix.
       </p>
 
-      <h3>Following the line</h3>
+      <h2>Log scales for exponential growth</h2>
 
       <p>
-        Let's be bold, and extend that straight line to bigger systems. It
-        is drawn through your measurements from 6 qubits upwards (the earlier
-        ones are shown faded, because they are dominated by overhead). The
-        horizontal lines are landmarks: an hour, a year, and the age of the
-        universe, about 13.8 billion years.
+        There's another way to plot this data that is more informative.
+        Instead having equal spacing between time values in the <code>y</code>
+        -axis of the plot, we can have a spacing that grows by a factor of 10
+        every tick.
+        Let's see what that looks like:
+      </p>
+
+      <Suspense fallback={<Loading />}>
+        <ScalingLog />
+      </Suspense>
+
+      <p>
+        It is much clearer to see how the simulation time grows for every point.
+        Moreover, using this scale, we can see that beyond 6 qubits the growth
+        clearly follows a straight line.
+        This line shown as a dotted line in the plot, is called a{" "}
+        <strong>fit</strong> to the data, and in this case all the measured 
+        points fall almost perfectly on the line, which means it is a very good fit!
+      </p>
+
+      <h2>Following the line to the end of the universe</h2>
+
+      <p>
+        Having a very good fit to our data means that we can very confidently 
+        predict how the simulation time will keep growing with number of qubits,
+        without having to actually take the data, which would take a very long time!
+        So let's extend our line and see how the simulation time grows.
+        In the following plot I have extended it as far as the age of the
+        universe, about 13.8 billion years!
+      </p>
+
+      <p>
+        What do you notice about the number of qubits?
       </p>
 
       <Suspense fallback={<Loading />}>
@@ -89,12 +126,11 @@ export default function Chapter5() {
         about 16. By around 26 qubits a single 0.01 second step would take
         longer than the age of the universe to calculate. The exact numbers
         depend on your computer, a faster one just shifts the line a little, but
-        a computer a thousand times faster only buys about three more qubits,
+        even the fastest supercomputer only buys about three more qubits,
         because each qubit costs a factor of ten.
       </p>
 
-      <h3>Couldn't we be cleverer?</h3>
-
+      <Step title="Couldn't we be cleverer?">
       <p>
         Fair question, and the answer is yes. What we timed is the most direct
         way to do it: build the whole <X>2^n \times 2^n</X> matrix and
@@ -118,8 +154,10 @@ export default function Chapter5() {
         the molecules and materials we would like to understand need
         hundreds.
       </p>
+      </Step>
 
-      <h3>What does a quantum computer do differently?</h3>
+
+      <h2>What does a quantum computer do differently?</h2>
 
       <p>
         A quantum computer doesn't build any matrices. The state of{" "}

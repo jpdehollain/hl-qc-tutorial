@@ -42,9 +42,32 @@ export function fitExponential(points, fitFrom = FIT_FROM) {
   };
 }
 
+/**
+ * Round-number axis for a linear plot: ticks 0, step, 2*step ... up to a top
+ * just above `max`, e.g. niceScale(39.7) -> { top: 40, ticks: [0, 10, 20, 30, 40] }.
+ */
+export function niceScale(max, target = 5) {
+  const raw = max / target;
+  const magnitude = 10 ** Math.floor(Math.log10(raw));
+  const normalised = raw / magnitude;
+  const step = (normalised <= 1 ? 1 : normalised <= 2 ? 2 : normalised <= 5 ? 5 : 10) * magnitude;
+  const top = Math.ceil(max / step - 1e-9) * step;
+  const ticks = [];
+  for (let v = 0; v <= top + step / 1000; v += step) ticks.push(+v.toPrecision(12));
+  return { top: +top.toPrecision(12), ticks };
+}
+
 const SUPERSCRIPT = { "-": "\u207b", 0: "\u2070", 1: "\u00b9", 2: "\u00b2", 3: "\u00b3", 4: "\u2074", 5: "\u2075", 6: "\u2076", 7: "\u2077", 8: "\u2078", 9: "\u2079" };
 /** 10^k written with a superscript, e.g. "10\u207b\u00b3". */
 export const tenToThe = (k) => "10" + String(k).split("").map((c) => SUPERSCRIPT[c]).join("");
+
+/** Label for a tick on the linear axis: always seconds above 1 s, so 80 s doesn't become "1.33 min". */
+export function fmtAxis(s) {
+  if (s === 0) return "0";
+  if (s < 1e-3) return `${+(s * 1e6).toPrecision(3)} \u00b5s`;
+  if (s < 1) return `${+(s * 1e3).toPrecision(3)} ms`;
+  return `${+s.toPrecision(3)} s`;
+}
 
 /** Short label for a time in seconds, for axes and tables. */
 export function fmtSeconds(s) {

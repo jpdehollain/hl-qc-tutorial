@@ -5,7 +5,7 @@ const CHAPTERS = [
   { id: 2, title: "Quantum footballs", accent: "var(--accent-2)" },
   { id: 3, title: "From football to Bloch sphere", accent: "var(--accent-3)" },
   { id: 4, title: "Qubits and simulations", accent: "var(--accent-4)" },
-  { id: 5, title: "Scaling up", accent: "var(--accent-5)" },
+  { id: 5, title: "How much harder can it get?", accent: "var(--accent-5)" },
 ];
 
 export default function Sidebar({ current, onSelect }) {
