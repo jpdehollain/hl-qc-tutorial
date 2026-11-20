@@ -13,7 +13,7 @@ export default function Sidebar({ current, onSelect }) {
     <nav className="sidebar" aria-label="Chapters">
       <div className="sidebar-mark">
         <img src="icons/icon-192.png" width="50" />
-        Computing the quantum world:<br />a tutorial
+        Computing the quantum world:<br />an interactive tutorial
       </div>
 
       <ol className="ladder">

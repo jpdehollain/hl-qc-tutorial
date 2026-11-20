@@ -7,10 +7,11 @@ gets bigger.
 
 ## Status
 
-Chapters 1–2 are built (the Hamiltonian/Newtonian analogy, and the
-pen-and-paper H=X derivation with an interactive Bloch sphere). Chapters
-3–5 (the Python/Pyodide simulator, scaling to more qubits, and the
-resource-extrapolation plot) are stubbed placeholders, to be built next.
+The full tutorial is functional and the text is pretty much complete.
+TODOs:
+- Add more visuals
+- One more chapter with some nuances about how quantum computers will
+actually work
 
 ## Stack
 
@@ -39,27 +40,6 @@ resource-extrapolation plot) are stubbed placeholders, to be built next.
    It will print a local URL (usually `http://localhost:5173`) — open
    that in your browser. Changes to any file under `src/` hot-reload
    automatically.
-
-## Icons
-
-This project doesn't ship any icons. Add your own as
-`public/icons/icon-192.png` and `public/icons/icon-512.png` (see the
-note in that folder) before deploying — `manifest.json` and
-`index.html` already reference those two filenames.
-
-## Deploying to GitHub Pages
-
-1. Push this folder to a new GitHub repository.
-2. In the repo, go to **Settings → Pages** and set the source to
-   **GitHub Actions**.
-3. Push to `main` — `.github/workflows/deploy.yml` builds the site with
-   `npm run build` and publishes the `dist/` folder automatically. Check
-   the **Actions** tab for progress; the deployed URL appears there and
-   under Settings → Pages once the workflow finishes.
-
-No other configuration is needed — `vite.config.js` uses a relative
-`base: "./"` so the build works under whatever the repo's Pages URL
-turns out to be.
 
 ## Project structure
 
