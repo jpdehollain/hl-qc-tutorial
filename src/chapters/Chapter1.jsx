@@ -1,4 +1,5 @@
 import Equation, { X } from "../components/Equation";
+import Step from "../components/Step";
 
 export default function Chapter1() {
   return (
