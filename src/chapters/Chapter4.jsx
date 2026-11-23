@@ -79,9 +79,10 @@ export default function Chapter4() {
       </p>
 
       <p>
-        Best of all, you can run this code right here. Just press the Run button
-        and the browser will run the Python code and plot the results on the Bloch
-        sphere below.
+        Best of all, this website can download Python to your device so you can
+        run the code blocks locally.
+        Press the <code>Run</code> button to run the Python code and
+        plot the results on the Bloch sphere below.
         To make it more fun, I have added some additional Hamiltonians and
         starting states for you to play with.
         Just pick them from the dropdown menus and watch how it changes the
@@ -91,6 +92,17 @@ export default function Chapter4() {
         Lastly, if you are familiar with the code, you can also edit it directly and
         press run.
       </p>
+
+      <Step title="Python download warning" >
+        <p>
+          Pressing <code>Run</code> will silently download Python and necessary
+          software packages (around 25MB total) to your device.
+          This is unnoticeable on most laptops and PCs, but may cause older
+          mobile devices to struggle.
+          For now this is the only way to see the results of the simulations in
+          this chapter.
+        </p>
+      </Step>
 
       <Suspense fallback={<Loading />}>
         <SingleQubitDemo />

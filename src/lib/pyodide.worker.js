@@ -32,7 +32,9 @@ async function init({ indexURL, packages }) {
   } catch (err) {
     self.postMessage({
       type: "init-error",
-      message: "Could not download Python. Check your internet connection and try again.",
+      message:
+        "Could not download Python. Check your internet connection and try again. " +
+        "(Some school and work networks block the site that Python is downloaded from.)",
       detail: String(err && err.message ? err.message : err),
     });
   }

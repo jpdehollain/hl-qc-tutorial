@@ -30,6 +30,17 @@
   height: 300px;
 }
 
+.bp-nowebgl {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
 .bp-idle {
   position: absolute;
   inset: 0;

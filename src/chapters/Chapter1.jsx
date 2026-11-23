@@ -16,19 +16,6 @@ export default function Chapter1() {
         computers powerful.
       </p>
 
-      <Step title="Temporary warning">
-        <p>
-          Part of this tutorial involves the use of code to run a few simulations
-          of quantum systems.
-          This when you open chapters 4 and 5, the browser will silently download the
-          software packages to run these simulations locally in your device.
-          The download size is around 30MB, which is fine for laptops and PCs,
-          but may cause older mobile devices to struggle.
-          I will soon add an option to get through the tutorial without requiring
-          this download, though it will not be as fun!
-        </p>
-      </Step>
-
       <h2>What do we use physics for?</h2>
 
       <p>

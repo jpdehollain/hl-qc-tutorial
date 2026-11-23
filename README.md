@@ -49,3 +49,9 @@ src/
   components/     Sidebar, Equation (KaTeX), BlochSphere (Three.js)
   styles/         design tokens (colour, type, spacing)
 ```
+## TODOs
+
+- [ ] Remove Python download warnings (ch 4-5) after implementing pop-up
+- [ ] Add End button with option to rate and provide feedback
+- [ ] Add example run to two-qubit simulation
+- [ ] Check risks of having editable code

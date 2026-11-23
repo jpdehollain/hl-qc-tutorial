@@ -196,6 +196,7 @@ export function MeasuredPlotLog({ points }) {
 
 /** Plot 3: the same line, extended until it passes the age of the universe. */
 export function ExtrapolationPlot({ points }) {
+  const examples = points.some((p) => p.example);
   const clipId = "sp-clip-" + useId().replace(/:/g, "");
   const fit = fitExponential(points);
   const universe = REFERENCES.find((r) => r.key === "universe");
@@ -268,7 +269,7 @@ export function ExtrapolationPlot({ points }) {
       </Frame>
       {fit && (
         <p className="sp-caption">
-          On this device every extra qubit makes a step about <strong>{`\u00d7${Math.round(fit.factor)}`}</strong>{" "}
+            {examples ? "In the example results" : "On this device"} every extra qubit makes a step about <strong>{`\u00d7${Math.round(fit.factor)}`}</strong>{" "}
           slower. A single step would take longer than the age of the universe at around{" "}
           <strong>{Math.round(crossing)} qubits</strong>, where the matrix alone would need{" "}
           {fmtBytes(matrixBytes(Math.round(crossing)))} of memory.

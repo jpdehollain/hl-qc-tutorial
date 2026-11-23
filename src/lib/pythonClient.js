@@ -1,3 +1,5 @@
+import { NO_WASM_MESSAGE, hasWebAssembly } from "./capabilities";
+
 // The page's side of the Python runtime: starts the worker (pyodide.worker.js),
 // sends it code to run, and can stop it. Same interface as the old pyodide.js.
 //
@@ -77,6 +79,10 @@ function startWorker() {
 
 /** Start loading Python (safe to call many times). Resolves when it is ready. */
 export function loadPython() {
+  if (!hasWebAssembly() || typeof Worker === "undefined") {
+    setPhase("error");
+    return Promise.reject(new Error(NO_WASM_MESSAGE));
+  }
   if (!readyPromise) startWorker();
   return readyPromise;
 }

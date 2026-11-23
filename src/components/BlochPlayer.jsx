@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { hasWebGL } from "../lib/capabilities";
 import "./BlochPlayer.css";
 
 // Bloch coordinates (x, y, z) -> three.js (x, z, -y): z points up, and the
@@ -39,8 +40,10 @@ const HEIGHT = 300;
 function BlochView({ title, vector, trail }) {
   const mountRef = useRef(null);
   const sceneRef = useRef(null);
+  const webgl = hasWebGL();
 
   useEffect(() => {
+    if (!hasWebGL()) return;
     const mount = mountRef.current;
     const width = mount.clientWidth || 300;
 
@@ -170,7 +173,14 @@ function BlochView({ title, vector, trail }) {
   return (
     <div className="bp-sphere">
       {title && <div className="bp-title">{title}</div>}
-      <div className="bp-canvas" ref={mountRef} />
+      {webgl ? (
+        <div className="bp-canvas" ref={mountRef} />
+      ) : (
+        <div className="bp-nowebgl">
+          Your browser can't draw 3D graphics (WebGL), so the sphere can't be shown here. The numbers below still
+          update as you play.
+        </div>
+      )}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 // The measurements made in Chapter 5, shared between the demo and the plots.
 // Kept in sessionStorage so they survive switching chapters or a page reload.
 import { useSyncExternalStore } from "react";
+import { EXAMPLE_POINTS } from "../data/exampleScaling";
 
 const KEY = "qc-tutorial-scaling-points";
 const EMPTY = [];
@@ -30,7 +31,13 @@ function emit() {
 
 /** Add (or replace) the measurement for p.n qubits. */
 export function addPoint(p) {
-  points = [...points.filter((q) => q.n !== p.n), p].sort((a, b) => a.n - b.n);
+  points = [...points.filter((q) => q.n !== p.n && !q.example), p].sort((a, b) => a.n - b.n); // real results replace any examples
+  emit();
+}
+
+/** Fill the plots with saved example results (for when Python can't run here). */
+export function loadExamplePoints() {
+  points = EXAMPLE_POINTS.map((p) => ({ ...p, example: true }));
   emit();
 }
 

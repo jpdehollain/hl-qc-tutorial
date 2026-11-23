@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import Equation, { X } from "./Equation";
+import { hasWebGL } from "../lib/capabilities";
 import "./BlochSphere.css";
 
 // Bloch-vector trajectory for |psi(t)> = cos(t)|0> - i sin(t)|1>,
@@ -34,6 +35,7 @@ function makeLabelSprite(text, color) {
 }
 
 export default function BlochSphere() {
+  const webgl = hasWebGL();
   const mountRef = useRef(null);
   const arrowRef = useRef(null);
   const [t, setT] = useState(0);
@@ -46,6 +48,7 @@ export default function BlochSphere() {
   }, [t]);
 
   useEffect(() => {
+    if (!hasWebGL()) return;
     const mount = mountRef.current;
     const width = mount.clientWidth;
     const height = mount.clientHeight;
@@ -176,7 +179,14 @@ export default function BlochSphere() {
 
   return (
     <div className="bloch">
-      <div className="bloch-canvas" ref={mountRef} />
+      {webgl ? (
+        <div className="bloch-canvas" ref={mountRef} />
+      ) : (
+        <div className="bloch-nowebgl">
+          Your browser can't draw 3D graphics (WebGL), so the sphere can't be shown here. The numbers below still
+          update as you move the slider.
+        </div>
+      )}
       <div className="bloch-controls">
         <div className="bloch-readout">
           <Equation tex={`|\\psi(t)\\rangle = \\begin{pmatrix} c_{tl} \\\\ c_{br} \\end{pmatrix} = \\begin{pmatrix} \\cos\\left(\\frac{\\pi}{2} t\\right) \\\\ -i\\sin\\left(\\frac{\\pi}{2} t\\right) \\end{pmatrix}`} />

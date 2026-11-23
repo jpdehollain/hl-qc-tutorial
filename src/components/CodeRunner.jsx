@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { usePreloadWhenVisible } from "../lib/usePython";
+import { useEffect, useState } from "react";
+import { PYTHON_DOWNLOAD_MB } from "../config";
 import "./CodeRunner.css";
 
 // Counts the seconds since it appeared on screen.
@@ -16,19 +16,17 @@ function Elapsed() {
 /**
  * An editable Python code box with a Run button and an output area.
  * It does not run anything itself: the parent passes the state from useCodeRun().
- * Pass `onStop` to show a Stop button while the code is running, and `preload`
- * (a function that starts loading Python) if the demo doesn't use the default runtime.
+ * Pass `onStop` to show a Stop button while the code is running.
+ * Python is only downloaded when the reader presses Run, never automatically.
  */
-export default function CodeRunner({ code, onChange, onRun, onReset, onStop, preload, status, pythonPhase, stdout, error }) {
-  const rootRef = useRef(null);
-  usePreloadWhenVisible(rootRef, preload);
+export default function CodeRunner({ code, onChange, onRun, onReset, onStop, status, pythonPhase, stdout, error }) {
 
   const running = status === "running";
   const downloading = running && pythonPhase === "loading";
 
   let output = null;
   if (downloading) {
-    output = { text: <>Downloading Python (first run only, a few seconds)&hellip; <Elapsed /></>, kind: "note" };
+    output = { text: <>Downloading Python (about {PYTHON_DOWNLOAD_MB} MB, first run only)&hellip; <Elapsed /></>, kind: "note" };
   } else if (running) {
     output = { text: <>Running&hellip; <Elapsed /></>, kind: "note" };
   } else if (status === "stopped") {
@@ -39,10 +37,15 @@ export default function CodeRunner({ code, onChange, onRun, onReset, onStop, pre
     output = { text: stdout, kind: "out" };
   } else if (status === "done") {
     output = { text: "Done \u2713", kind: "note" };
+  } else if (status === "idle" && pythonPhase === "idle") {
+    output = {
+      text: `The first Run downloads Python to your browser (about ${PYTHON_DOWNLOAD_MB} MB, once). After that it's instant.`,
+      kind: "note",
+    };
   }
 
   return (
-    <div className="cr" ref={rootRef}>
+    <div className="cr">
       <div className="cr-bar">
         <span className="cr-lang">Python</span>
         <span className="cr-hint">you can edit this code</span>

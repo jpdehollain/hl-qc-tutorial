@@ -9,28 +9,6 @@ export function usePythonPhase() {
 }
 
 /**
- * Start downloading Python once the element in `ref` is near the screen.
- * Pass `load` to preload a different Python runtime than the default one.
- */
-export function usePreloadWhenVisible(ref, load = loadPython) {
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || typeof IntersectionObserver === "undefined") return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          load().catch(() => {}); // errors are shown when the user presses Run
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "600px" }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [ref, load]);
-}
-
-/**
  * Run Python code and keep track of the outcome.
  * `result` keeps the last successful result, so a typo in the code doesn't
  * wipe the picture.

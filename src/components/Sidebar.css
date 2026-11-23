@@ -94,6 +94,23 @@
   margin-left: 5px;
 }
 
+.sidebar-about {
+  margin-top: 2rem;
+  padding: 0.3rem 0;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.sidebar-about:hover,
+.sidebar-about.is-current {
+  color: var(--text);
+}
+
 @media (max-width: 860px) {
   .sidebar {
     border-right: none;

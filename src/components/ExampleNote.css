@@ -1,0 +1,9 @@
+.example-note {
+  margin: 1rem 0 0;
+  padding: 0.5rem 0.8rem;
+  border-left: 3px solid var(--accent-5);
+  background: var(--bg-panel);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}

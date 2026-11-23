@@ -1,3 +1,5 @@
+import { NO_WASM_MESSAGE, PYTHON_DOWNLOAD_FAILED, hasWebAssembly } from "./capabilities";
+
 // Loads Python (Pyodide, i.e. Python compiled to WebAssembly) in the browser,
 // once, and lets any component run code in it.
 //
@@ -30,7 +32,7 @@ function loadScript(src) {
     const el = document.createElement("script");
     el.src = src;
     el.onload = () => resolve();
-    el.onerror = () => reject(new Error("Could not download Python. Check your internet connection and try again."));
+    el.onerror = () => reject(new Error(PYTHON_DOWNLOAD_FAILED))
     document.head.appendChild(el);
   });
 }
@@ -40,6 +42,7 @@ export function loadPython() {
   if (!pyodidePromise) {
     setPhase("loading");
     pyodidePromise = (async () => {
+      if (!hasWebAssembly()) throw new Error(NO_WASM_MESSAGE);
       await loadScript(`${INDEX_URL}pyodide.js`);
       const py = await window.loadPyodide({ indexURL: INDEX_URL });
       await py.loadPackage("numpy");

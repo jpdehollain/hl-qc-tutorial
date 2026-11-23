@@ -2,8 +2,8 @@ import { useRef, useState } from "react";
 import CodeRunner from "./CodeRunner";
 import { MeasuredPlot, PointsTable } from "./ScalingPlots";
 import { useCodeRun } from "../lib/useWorkerPython";
-import { loadPython } from "../lib/pythonClient";
-import { addPoint, clearPoints, usePoints } from "../lib/scalingStore";
+import { addPoint, clearPoints, loadExamplePoints, usePoints } from "../lib/scalingStore";
+import ExampleNote from "./ExampleNote";
 import rawCode from "../python/scaling.py?raw";
 import collect from "../python/collect_scaling.py?raw";
 import "./Demos.css";
@@ -82,6 +82,9 @@ export default function ScalingDemo() {
         <button className="demo-button" onClick={runSweep} disabled={busy}>
           Run {SWEEP_FROM} to {SWEEP_TO} for me
         </button>
+        <button className="demo-button demo-button-quiet" onClick={loadExamplePoints} disabled={busy}>
+          Use example results
+        </button>
         {points.length > 0 && (
           <button className="demo-button demo-button-quiet" onClick={clearPoints} disabled={busy}>
             Clear results
@@ -95,7 +98,6 @@ export default function ScalingDemo() {
         onRun={() => runOnce(code)}
         onReset={() => setCode(defaultCode)}
         onStop={stop}
-        preload={loadPython}
         status={status}
         pythonPhase={pythonPhase}
         stdout={stdout}
@@ -103,7 +105,14 @@ export default function ScalingDemo() {
       />
 
       {sweeping && n && <p className="scaling-progress">Simulating {n} qubits&hellip;</p>}
+      {pythonPhase === "error" && (
+        <p className="scaling-progress">
+          Python couldn't be loaded here (some school and work networks block it). You can still explore the
+          plots with the example results.
+        </p>
+      )}
 
+      <ExampleNote points={points} />
       <MeasuredPlot points={points} />
       <PointsTable points={points} />
     </div>

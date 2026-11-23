@@ -39,6 +39,14 @@ export default function Sidebar({ current, onSelect }) {
           );
         })}
       </ol>
+
+      <button
+        className={`sidebar-about ${current === "about" ? "is-current" : ""}`}
+        onClick={() => onSelect("about")}
+        aria-current={current === "about" ? "true" : undefined}
+      >
+        About &amp; credits
+      </button>
     </nav>
   );
 }
