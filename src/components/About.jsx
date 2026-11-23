@@ -10,17 +10,25 @@ export default function About() {
       <h1>About this tutorial</h1>
 
       <p>
-        <em>Computing the quantum world</em> is a free, interactive introduction to why quantum computers are
-        powerful, and what they are (and aren't) good for, built around one worked example. It was written by{" "}
-        {AUTHOR} for high-school students, and the interactive parts run in your browser.
+        <em>Computing the quantum world</em> is a free, interactive introduction
+        to why quantum computers are powerful, and what they are (and aren't)
+        good for, built around some interactive examples that run code locally
+        through your browser.
       </p>
 
-      <h3>Found a mistake, or have an idea?</h3>
+      <p>
+        It was written by me, {AUTHOR} with coding help from Claude.
+        I am an experimental physicist and engineer who helps develop hardware
+        for quantum computers.
+      </p>
+
+      <h3>Found a mistake, have an idea or want to ask me a question?</h3>
 
       <p>
-        Please tell me on <Link href={ISSUES_URL}>GitHub</Link>. The source code is at{" "}
-        <Link href={REPO_URL}>{REPO_URL.replace("https://", "")}</Link> and is released under the MIT licence (see
-        the LICENSE file there).
+        Please post an issue on <Link href={ISSUES_URL}>GitHub</Link>.
+        The source code is at{" "}
+        <Link href={REPO_URL}>{REPO_URL.replace("https://", "")}</Link> and is
+        released under the MIT licence (see the LICENSE file there).
       </p>
 
       <h3>Privacy</h3>
@@ -52,8 +60,6 @@ export default function About() {
           <Link href="https://fontsource.org">Fontsource</Link> (SIL Open Font Licence 1.1).
         </li>
       </ul>
-
-      <p>The research behind some of the numbers is listed where it is used, at the end of Chapter 5.</p>
     </article>
   );
 }
