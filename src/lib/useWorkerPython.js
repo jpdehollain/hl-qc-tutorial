@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cancelPython, getPythonPhase, runPython, subscribePythonPhase } from "./pythonClient";
+import { requestPythonConsent } from "./consent";
 
 // Same idea as usePython.js, but running Python in a background thread (see
 // pythonClient.js), so a long simulation doesn't freeze the page and can be stopped.
@@ -22,6 +23,11 @@ export function useCodeRun() {
   const pythonPhase = usePythonPhase();
 
   const run = useCallback(async (code, collect) => {
+    // Ask before the first download of Python (only once per visit).
+    if (!(await requestPythonConsent())) {
+      setState((s) => ({ ...s, status: "declined", error: "" }));
+      return { declined: true };
+    }
     const id = ++latest.current;
     setState((s) => ({ ...s, status: "running", error: "" }));
     try {

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getPythonPhase, loadPython, runPython, subscribePythonPhase } from "./pyodide";
+import { requestPythonConsent } from "./consent";
 
 /** The current state of the shared Python runtime: idle | loading | ready | error. */
 export function usePythonPhase() {
@@ -19,6 +20,11 @@ export function useCodeRun() {
   const pythonPhase = usePythonPhase();
 
   const run = useCallback(async (code, collect) => {
+    // Ask before the first download of Python (only once per visit).
+    if (!(await requestPythonConsent())) {
+      setState((s) => ({ ...s, status: "declined", error: "" }));
+      return { declined: true };
+    }
     const id = ++latest.current;
     setState((s) => ({ ...s, status: "running", error: "" }));
     try {

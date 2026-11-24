@@ -31,6 +31,11 @@ export default function CodeRunner({ code, onChange, onRun, onReset, onStop, sta
     output = { text: <>Running&hellip; <Elapsed /></>, kind: "note" };
   } else if (status === "stopped") {
     output = { text: "Stopped. Python restarts the next time you press Run (a few seconds).", kind: "note" };
+  } else if (status === "declined") {
+    output = {
+      text: `Not run. The simulations need Python (about ${PYTHON_DOWNLOAD_MB} MB). Press Run again if you change your mind.`,
+      kind: "note",
+    };
   } else if (error) {
     output = { text: [stdout, error].filter(Boolean).join("\n"), kind: "error" };
   } else if (stdout) {
@@ -39,7 +44,7 @@ export default function CodeRunner({ code, onChange, onRun, onReset, onStop, sta
     output = { text: "Done \u2713", kind: "note" };
   } else if (status === "idle" && pythonPhase === "idle") {
     output = {
-      text: `The first Run downloads Python to your browser (about ${PYTHON_DOWNLOAD_MB} MB, once). After that it's instant.`,
+      text: `The first Run asks before downloading Python (about ${PYTHON_DOWNLOAD_MB} MB). After that it's instant.`,
       kind: "note",
     };
   }

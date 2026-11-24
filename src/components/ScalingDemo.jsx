@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import CodeRunner from "./CodeRunner";
 import { MeasuredPlot, PointsTable } from "./ScalingPlots";
 import { useCodeRun } from "../lib/useWorkerPython";
+import { requestPythonConsent } from "../lib/consent";
 import { addPoint, clearPoints, loadExamplePoints, usePoints } from "../lib/scalingStore";
 import ExampleNote from "./ExampleNote";
 import rawCode from "../python/scaling.py?raw";
@@ -47,6 +48,7 @@ export default function ScalingDemo() {
 
   // Run every size from 2 to 9 one after another.
   async function runSweep() {
+    if (!(await requestPythonConsent())) return; // ask first, before anything changes on screen
     stopRequested.current = false;
     setSweeping(true);
     for (let k = SWEEP_FROM; k <= SWEEP_TO && !stopRequested.current; k++) {

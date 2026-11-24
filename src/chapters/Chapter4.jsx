@@ -93,17 +93,6 @@ export default function Chapter4() {
         press run.
       </p>
 
-      <Step title="Python download warning" >
-        <p>
-          Pressing <code>Run</code> will silently download Python and necessary
-          software packages (around 25MB total) to your device.
-          This is unnoticeable on most laptops and PCs, but may cause older
-          mobile devices to struggle.
-          For now this is the only way to see the results of the simulations in
-          this chapter.
-        </p>
-      </Step>
-
       <Suspense fallback={<Loading />}>
         <SingleQubitDemo />
       </Suspense>

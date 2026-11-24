@@ -60,18 +60,6 @@ export default function Chapter5() {
         and if you want to clear the plot and start over you can press <code>Clear results</code>.
       </p>
 
-      <Step title="Python download warning" >
-        <p>
-          If you didn't run simulations in chapter 4, pressing{" "}
-          <code>Run</code> below will silently download Python and necessary
-          software packages (around 25MB total) to your device.
-          This is unnoticeable on most laptops and PCs, but may cause older
-          mobile devices to struggle.
-          If you prefer not to run the simulations, you can press{" "}
-          <code>Run example results</code> to load the plots with sample data.
-        </p>
-      </Step>
-
       <Suspense fallback={<Loading />}>
         <ScalingDemo />
       </Suspense>

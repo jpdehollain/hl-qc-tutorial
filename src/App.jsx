@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Sidebar from "./components/Sidebar";
 import ErrorBoundary from "./components/ErrorBoundary";
 import About from "./components/About";
+import PythonDownloadDialog from "./components/PythonDownloadDialog";
 import Chapter1 from "./chapters/Chapter1";
 import Chapter2 from "./chapters/Chapter2";
 import Chapter3 from "./chapters/Chapter3";
@@ -67,6 +68,7 @@ export default function App() {
           </div>
         </div>
       </main>
+      <PythonDownloadDialog />
     </div>
   );
 }

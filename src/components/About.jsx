@@ -38,10 +38,11 @@ export default function About() {
         in your browser's session storage, and never leave your device.
       </p>
       <p>
-        The Python runs on your device too, but the first time you press <strong>Run</strong>, your browser
-        downloads Python and its libraries (about {PYTHON_DOWNLOAD_MB} MB) from the{" "}
+        Python and its libraries (about {PYTHON_DOWNLOAD_MB} MB) is downloaded after you consent from the{" "}
         <Link href="https://www.jsdelivr.com">jsDelivr</Link> content delivery network, which, like any site you
-        visit, can see your IP address. The site itself is hosted on{" "}
+        visit, can see your IP address.
+        Once downloaded, Python is run locally on your device from the browser.
+        The tutorial site itself is hosted on{" "}
         <Link href="https://pages.github.com">GitHub Pages</Link>, which keeps its own standard server logs.
       </p>
 

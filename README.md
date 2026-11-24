@@ -51,7 +51,7 @@ src/
 ```
 ## TODOs
 
-- [ ] Remove Python download warnings (ch 4-5) after implementing pop-up
+- [ ] Add codeblock to replace expm with more efficient version
 - [ ] Add End button with option to rate and provide feedback
 - [ ] Add example run to two-qubit simulation
-- [ ] Check risks of having editable code
+- [ ] Add non-reusable license for mascot
