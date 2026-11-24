@@ -7,12 +7,13 @@ Y = np.array([[0, -1j], [1j, 0]], dtype=complex)
 Z = np.array([[1, 0], [0, -1]], dtype=complex)
 
 
-def time_one_step(H, psi0, dt=0.01, repeats=2000):
+def time_one_step(H, psi0, t_f=2, repeats=2001):
     """Average time, in seconds, to take one step of the time evolution."""
-    expm(-1j * H * dt) @ psi0          # warm-up run, not timed
+    times = np.linspace(0, t_f, repeats)
+    expm(-1j * H * times[1]) @ psi0          # warm-up run, not timed
     start = time.perf_counter()
-    for _ in range(repeats):
-        psi = expm(-1j * H * dt) @ psi0
+    for t in times:
+        psi = expm(-1j * H * t) @ psi0
     return (time.perf_counter() - start) / repeats
 
 
