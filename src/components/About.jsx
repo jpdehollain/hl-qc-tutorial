@@ -27,23 +27,28 @@ export default function About() {
       <p>
         Please post an issue on <Link href={ISSUES_URL}>GitHub</Link>.
         The source code is at{" "}
-        <Link href={REPO_URL}>{REPO_URL.replace("https://", "")}</Link> and is
-        released under the MIT licence (see the LICENSE file there).
+        <Link href={REPO_URL}>{REPO_URL.replace("https://", "")}</Link> and is 
+        released under the MIT licence (see the LICENSE file there). The mascot
+        and the other artwork are not covered by that licence, so please ask
+        before reusing them.
       </p>
 
       <h3>Privacy</h3>
 
       <p>
-        There are no accounts, no cookies and no analytics. The results you collect in the Python demos are kept only
-        in your browser's session storage, and never leave your device.
+        There are no accounts, no cookies and no analytics. The results you
+        collect in the Python demos are kept only in your browser's session 
+        storage, and never leave your device.
       </p>
       <p>
-        Python and its libraries (about {PYTHON_DOWNLOAD_MB} MB) is downloaded after you consent from the{" "}
-        <Link href="https://www.jsdelivr.com">jsDelivr</Link> content delivery network, which, like any site you
-        visit, can see your IP address.
+        Python and its libraries (about {PYTHON_DOWNLOAD_MB} MB) is downloaded
+        after you consent from the{" "}
+        <Link href="https://www.jsdelivr.com">jsDelivr</Link> content delivery
+        network, which, like any site you visit, can see your IP address.
         Once downloaded, Python is run locally on your device from the browser.
         The tutorial site itself is hosted on{" "}
-        <Link href="https://pages.github.com">GitHub Pages</Link>, which keeps its own standard server logs.
+        <Link href="https://pages.github.com">GitHub Pages</Link>, which keeps 
+        its own standard server logs.
       </p>
 
       <h3>Credits</h3>
@@ -60,6 +65,7 @@ export default function About() {
           The <Link href="https://github.com/IBM/plex">IBM Plex</Link> typefaces, served through{" "}
           <Link href="https://fontsource.org">Fontsource</Link> (SIL Open Font Licence 1.1).
         </li>
+        <li>The mascot illustration was created with Microsoft Copilot.</li>
       </ul>
     </article>
   );

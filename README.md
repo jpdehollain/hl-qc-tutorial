@@ -9,9 +9,9 @@ gets bigger.
 
 The full tutorial is functional and the text is pretty much complete.
 TODOs:
-- Add more visuals
-- One more chapter with some nuances about how quantum computers will
-actually work
+- [ ] Add more visuals
+- [ ] Add codeblock to replace expm with more efficient version
+- [ ] Add example run to two-qubit simulation
 
 ## Stack
 
@@ -49,8 +49,9 @@ src/
   components/     Sidebar, Equation (KaTeX), BlochSphere (Three.js)
   styles/         design tokens (colour, type, spacing)
 ```
-## TODOs
 
-- [ ] Add codeblock to replace expm with more efficient version
-- [ ] Add example run to two-qubit simulation
-- [ ] Add non-reusable license for mascot
+## Licence
+
+The code is released under the MIT licence (see `LICENSE`). The artwork in
+`public/icons/` and `public/social-card.png` (the mascot and the images made
+from it) is not covered by that licence, so please ask before reusing it.
