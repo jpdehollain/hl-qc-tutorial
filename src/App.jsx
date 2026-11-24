@@ -58,10 +58,13 @@ export default function App() {
                   &larr; Previous
                 </button>
                 <button
-                  disabled={current === LAST_CHAPTER}
-                  onClick={() => setCurrent((c) => Math.min(LAST_CHAPTER, c + 1))}
+                  onClick={() => 
+                    current === LAST_CHAPTER
+                      ? setCurrent("about")
+                      : setCurrent((c) => Math.min(LAST_CHAPTER, c + 1))
+                  }
                 >
-                  Next &rarr;
+                  {current === LAST_CHAPTER ? "End" : "Next →"}
                 </button>
               </>
             )}

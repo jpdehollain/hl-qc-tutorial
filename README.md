@@ -52,6 +52,5 @@ src/
 ## TODOs
 
 - [ ] Add codeblock to replace expm with more efficient version
-- [ ] Add End button with option to rate and provide feedback
 - [ ] Add example run to two-qubit simulation
 - [ ] Add non-reusable license for mascot
