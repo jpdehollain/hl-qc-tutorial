@@ -45,10 +45,13 @@ export default function PythonDownloadDialog() {
       <div className="py-dialog-box">
         <h2 id="py-dialog-title">Download Python to run this code?</h2>
         <p>
-          To run code, your browser needs to download Python (about {PYTHON_DOWNLOAD_MB} MB). Nothing is installed:
-          Python runs inside this page, and stops when you close it.
+          To run code, your browser needs to download Python (about {PYTHON_DOWNLOAD_MB} MB).
+          Nothing is installed: Python runs inside this page, and stops when you close it.
         </p>
-        <p>Press Continue to download it, or Cancel to carry on with the tutorial without running the simulations.</p>
+        <p>Press Continue to download it, or Cancel to carry on with the tutorial without
+          running the simulations &mdash; you can press {" "}
+          <code>Use example results</code> to load example data on the figures in chapter 5.
+        </p>
         <div className="py-dialog-buttons">
           <button onClick={() => answer(false)}>Cancel</button>
           <button className="py-dialog-primary" onClick={() => answer(true)} autoFocus>
