@@ -10,7 +10,6 @@ gets bigger.
 The full tutorial is functional and the text is pretty much complete.
 TODOs:
 - [ ] Add more visuals
-- [ ] Add codeblock to replace expm with more efficient version
 - [ ] Add example run to two-qubit simulation
 
 ## Stack

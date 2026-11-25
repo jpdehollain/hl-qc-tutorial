@@ -130,15 +130,35 @@ export default function Chapter5() {
         because each qubit costs a factor of ten.
       </p>
 
-      <Step title="Couldn't we be cleverer?">
+      <Step title="Try some smarter coding: Can you simulate more qubits?">
       <p>
-        Fair question, and the answer is yes. What we timed is the most direct
-        way to do it: build the whole <X>2^n \times 2^n</X> matrix and
-        exponentiate it. There are much smarter classical methods. We don't
-        really need the full matrix, only the state, which has{" "}
-        <X>2^n</X> numbers instead of <X>4^n</X>, and we can take advantage
-        of the fact that most of the entries in <X>H</X> are zero. With tricks
-        like this, supercomputers have simulated around 45 qubits. In 2017 one
+        The <code>expm()</code> function provides generic matrix exponentiation.
+        Hamiltonians have the constraint of being <em>Hermitian</em>, which 
+        allows us to perform the exponentiation through a more efficient
+        diagonalisation algorithm.
+      </p>
+
+      <p>  
+        I can show you how this works.
+        Find the following line code above:
+        <div style={{ height: "0.3em" }} />
+        <code>psi = expm(-1j * H * dt) @ psi0</code>
+        <div style={{ height: "0.3em" }} />
+        and replace it with the following two, making sure you keep the same indentation
+        on both lines, matching the previous line:
+        <div style={{ height: "0.3em" }} />
+        <code>evals, evecs = np.linalg.eigh(H)</code><br />
+        <code>psi = evecs @ (np.exp(-1j * evals * dt) * (evecs.conj() @ psi0))</code>
+      </p>
+
+      <p>
+        Run all the simulations again and see if the scaling extrapolation changed.
+        Can you simulate more qubits now?
+      </p>
+
+      <p>
+        With tricks like this, more clever maths and more computing power, 
+        supercomputers have simulated around 45 qubits. In 2017 one
         of the world's largest machines did it by using half a petabyte of
         memory, just to hold the state. For some special systems, like chains
         that are only weakly entangled, other methods can go further still.
@@ -152,7 +172,7 @@ export default function Chapter5() {
         qubit doubles the memory. Somewhere around 45 to 50 qubits the state
         alone no longer fits in the memory of the biggest supercomputers, and
         the molecules and materials we would like to understand need
-        hundreds.
+        hundreds or thousands.
       </p>
       </Step>
 
